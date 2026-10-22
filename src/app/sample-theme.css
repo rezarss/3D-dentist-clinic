@@ -558,18 +558,18 @@
   color: #756F62;
 }
 
-/* Centered desktop pill navigation */
+/* Centered desktop navigation without background */
 .desktop-nav {
   display: flex;
   align-items: center;
   gap: 3px;
   padding: 5px;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.95);
+  background: transparent;
+  border: none;
   border-radius: 100px;
   position: relative;
   z-index: 1;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.95), 0 4px 16px rgba(48, 42, 33, 0.04);
+  box-shadow: none;
 }
 .desktop-nav a {
   color: #463F32;

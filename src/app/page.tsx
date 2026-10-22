@@ -141,6 +141,8 @@ export default async function HomePage() {
       categorySlug: firstCat?.slug || "smile",
       categoryName: firstCat?.name?.fa || "زیبایی لبخند",
       images: Array.isArray(p.images) && p.images.length > 0 ? p.images : [],
+      beforeImage: p.beforeImage || (Array.isArray(p.images) && p.images[1]) || "",
+      afterImage: p.afterImage || (Array.isArray(p.images) && p.images[0]) || "",
       featureTitle: p.featureTitle || p.title?.fa || "",
       featureSubtitle: p.featureSubtitle || p.description?.fa || "",
     };
