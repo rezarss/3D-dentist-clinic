@@ -12,6 +12,7 @@ type PersianDatePickerProps = {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
+  minDate?: string;
   id?: string;
   clearable?: boolean;
 };
@@ -53,6 +54,7 @@ export function PersianDatePicker({
   label,
   placeholder,
   disabled = false,
+  minDate,
   id,
   clearable = true,
 }: PersianDatePickerProps) {
@@ -116,7 +118,8 @@ export function PersianDatePicker({
   }, [mode, visible]);
 
   function showPicker() {
-    const initialDate = toJalaliDate(currentValueDate(value, mode)) ?? toJalaliDate(todayIsoDate());
+    const currentDate = currentValueDate(value, mode);
+    const initialDate = toJalaliDate(minDate && currentDate < minDate ? minDate : currentDate) ?? toJalaliDate(todayIsoDate());
     if (initialDate) setVisible({ year: initialDate.year, month: initialDate.month });
     setOpen(true);
   }
@@ -135,12 +138,20 @@ export function PersianDatePicker({
   function changeMonth(amount: number) {
     setVisible((current) => {
       const monthIndex = current.month - 1 + amount;
-      const year = current.year + Math.floor(monthIndex / 12);
-      return { year, month: ((monthIndex % 12) + 12) % 12 + 1 };
+      const next = {
+        year: current.year + Math.floor(monthIndex / 12),
+        month: ((monthIndex % 12) + 12) % 12 + 1,
+      };
+      if (minimumJalali && (
+        next.year < minimumJalali.year ||
+        (next.year === minimumJalali.year && next.month < minimumJalali.month)
+      )) return current;
+      return next;
     });
   }
 
   function selectDate(isoDate: string) {
+    if (minDate && isoDate < minDate) return;
     if (mode === "datetime") {
       onChange(`${isoDate}T${selectedTime}`);
       return;
@@ -162,6 +173,10 @@ export function PersianDatePicker({
       : "";
   const emptyPlaceholder = placeholder ?? (mode === "time" ? "انتخاب ساعت" : mode === "datetime" ? "انتخاب تاریخ و ساعت" : "انتخاب تاریخ شمسی");
   const today = todayIsoDate();
+  const minimumJalali = minDate ? toJalaliDate(minDate) : null;
+  const effectiveToday = minDate ?? today;
+  const yearOptions = Array.from({ length: 21 }, (_, index) => visible.year - 10 + index)
+    .filter((year) => !minimumJalali || year >= minimumJalali.year);
 
   return (
     <div 
@@ -205,13 +220,37 @@ export function PersianDatePicker({
           {mode !== "time" && (
             <section className="persian-calendar">
               <header className="persian-calendar-header">
-                <button type="button" className="persian-calendar-nav" aria-label="ماه قبل" onClick={() => changeMonth(-1)}>‹</button>
+                <button
+                  type="button"
+                  className="persian-calendar-nav"
+                  aria-label="ماه قبل"
+                  onClick={() => changeMonth(-1)}
+                  disabled={Boolean(minimumJalali && visible.year === minimumJalali.year && visible.month <= minimumJalali.month)}
+                >‹</button>
                 <div className="persian-calendar-heading">
-                  <select aria-label="ماه شمسی" value={visible.month} onChange={(event) => setVisible((current) => ({ ...current, month: Number(event.target.value) }))}>
-                    {monthNames.map((name, index) => <option key={name} value={index + 1}>{name}</option>)}
+                  <select
+                    aria-label="ماه شمسی"
+                    value={visible.month}
+                    onChange={(event) => setVisible((current) => ({ ...current, month: Number(event.target.value) }))}
+                  >
+                    {monthNames.map((name, index) => index + 1 >= (minimumJalali && visible.year === minimumJalali.year ? minimumJalali.month : 1)
+                      ? <option key={name} value={index + 1}>{name}</option>
+                      : null)}
                   </select>
-                  <select aria-label="سال شمسی" value={visible.year} onChange={(event) => setVisible((current) => ({ ...current, year: Number(event.target.value) }))}>
-                    {Array.from({ length: 21 }, (_, index) => visible.year - 10 + index).map((year) => <option key={year} value={year}>{persianNumber.format(year)}</option>)}
+                  <select
+                    aria-label="سال شمسی"
+                    value={visible.year}
+                    onChange={(event) => setVisible((current) => {
+                      const year = Number(event.target.value);
+                      return {
+                        year,
+                        month: minimumJalali && year === minimumJalali.year && current.month < minimumJalali.month
+                          ? minimumJalali.month
+                          : current.month,
+                      };
+                    })}
+                  >
+                    {yearOptions.map((year) => <option key={year} value={year}>{persianNumber.format(year)}</option>)}
                   </select>
                 </div>
                 <button type="button" className="persian-calendar-nav" aria-label="ماه بعد" onClick={() => changeMonth(1)}>›</button>
@@ -224,7 +263,8 @@ export function PersianDatePicker({
                   <button
                     key={day.isoDate}
                     type="button"
-                    className={`${day.isoDate === dateValue ? "selected" : ""}${day.isoDate === today ? " today" : ""}`}
+                    className={`${day.isoDate === dateValue ? "selected" : ""}${day.isoDate === effectiveToday ? " today" : ""}`}
+                    disabled={Boolean(minDate && day.isoDate < minDate)}
                     aria-pressed={day.isoDate === dateValue}
                     aria-label={`${persianNumber.format(day.day)} ${monthNames[visible.month - 1]} ${persianNumber.format(visible.year)}`}
                     onClick={() => selectDate(day.isoDate)}
@@ -232,7 +272,7 @@ export function PersianDatePicker({
                 ) : <span key={`empty-${visible.year}-${visible.month}-${index}`} aria-hidden="true" />)}
               </div>
               <div className="persian-calendar-actions">
-                <button type="button" className="persian-calendar-today" onClick={() => selectDate(today)}>امروز</button>
+                <button type="button" className="persian-calendar-today" onClick={() => selectDate(effectiveToday)}>امروز</button>
                 {clearable && <button type="button" className="persian-calendar-clear" onClick={() => { onChange(""); setOpen(false); }}>پاک کردن</button>}
               </div>
             </section>

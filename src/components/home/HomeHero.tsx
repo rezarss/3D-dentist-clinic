@@ -68,7 +68,7 @@ export function HomeHero() {
               {/* Primary Booking Button */}
               <a 
                 href="#booking"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold !text-white bg-[#625D45] hover:bg-[#7F795D] active:bg-[#4E4A37] transition-all duration-200 shadow-[0_8px_25px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_30px_rgba(98,93,69,0.5)] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold !text-white bg-[#625D45] hover:bg-[#343F2B] active:bg-[#4E4A37] transition-all duration-200 shadow-[0_8px_25px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_30px_rgba(98,93,69,0.5)] cursor-pointer"
                 style={{ color: "#ffffff" }}
               >
                 <CalendarCheck className="w-4 h-4 text-white" style={{ color: "#ffffff" }} />

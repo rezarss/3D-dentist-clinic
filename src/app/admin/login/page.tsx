@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
         <label className="admin-login-field">رمز عبور<input value={password} onChange={e=>setPassword(e.target.value)} type="password" autoComplete="current-password" minLength={8} required /></label>
         {error && <p className="admin-login-error" role="alert">{error}</p>}
         <button disabled={loading} type="submit" style={{width:"100%",padding:12}}>{loading?"در حال ورود…":"ورود"}</button>
-        <div style={{ marginTop: 16, padding: "12px 14px", background: "rgba(160, 155, 124, 0.12)", border: "1px solid rgba(160, 155, 124, 0.25)", borderRadius: 12, fontSize: 13, lineHeight: 1.8 }}>
+        <div style={{ marginTop: 16, padding: "12px 14px", background: "rgba(64,76,52, 0.12)", border: "1px solid rgba(64,76,52, 0.25)", borderRadius: 12, fontSize: 13, lineHeight: 1.8 }}>
           <div style={{ fontWeight: "bold", marginBottom: 4 }}>اطلاعات حساب پیش‌فرض:</div>
           <div>ایمیل: <strong dir="ltr">admin@example.com</strong></div>
           <div>رمز عبور: <strong dir="ltr">admin123456</strong></div>

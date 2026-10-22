@@ -168,7 +168,7 @@ export default async function HomePage() {
   }));
 
   return (
-    <main className="min-h-screen bg-[#F7F4EE] text-[#302A21] selection:bg-[#A09B7C]/20 selection:text-[#625D45] relative">
+    <main className="min-h-screen bg-[#F7F4EE] text-[#302A21] selection:bg-[#404c34]/20 selection:text-[#625D45] relative">
       {/* ۱. هیرو (Hero) */}
       <SampleHero />
 

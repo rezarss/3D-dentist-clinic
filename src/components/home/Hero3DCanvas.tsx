@@ -48,7 +48,7 @@ export function Hero3DCanvas() {
         // Soft radial aura
         const rad = ctx.createRadialGradient(cx, cy, 10, cx, cy, 160);
         rad.addColorStop(0, "rgba(216, 174, 152, 0.4)");
-        rad.addColorStop(0.6, "rgba(160, 155, 124, 0.15)");
+        rad.addColorStop(0.6, "rgba(64,76,52, 0.15)");
         rad.addColorStop(1, "rgba(247, 244, 238, 0)");
         ctx.fillStyle = rad;
         ctx.beginPath();
@@ -56,7 +56,7 @@ export function Hero3DCanvas() {
         ctx.fill();
 
         // Elegant geometric rings
-        ctx.strokeStyle = "rgba(160, 155, 124, 0.35)";
+        ctx.strokeStyle = "rgba(64,76,52, 0.35)";
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.ellipse(cx, cy, 120, 48, -0.25, 0, Math.PI * 2);
@@ -225,7 +225,7 @@ export function Hero3DCanvas() {
     if (sCtx) {
       const grad = sCtx.createRadialGradient(64, 64, 0, 64, 64, 60);
       grad.addColorStop(0, "rgba(48, 42, 33, 0.16)");
-      grad.addColorStop(0.4, "rgba(160, 155, 124, 0.08)");
+      grad.addColorStop(0.4, "rgba(64,76,52, 0.08)");
       grad.addColorStop(1, "rgba(247, 244, 238, 0)");
       sCtx.fillStyle = grad;
       sCtx.fillRect(0, 0, 128, 128);
@@ -469,7 +469,7 @@ export function Hero3DCanvas() {
       <div 
         className="absolute inset-0 pointer-events-none rounded-full blur-[130px] opacity-35"
         style={{
-          background: "radial-gradient(circle at center, #D8AE98 0%, #A09B7C 40%, transparent 70%)"
+          background: "radial-gradient(circle at center, #D8AE98 0%, #404c34 40%, transparent 70%)"
         }}
       />
 
@@ -483,7 +483,7 @@ export function Hero3DCanvas() {
       {/* Subtle Unboxed Interaction Hint - Floating seamlessly without border box */}
       <div className={`absolute bottom-2 sm:bottom-4 z-20 pointer-events-none transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
         <div className="flex items-center gap-2 text-xs font-medium text-[#817C70]/90">
-          <Sparkles className="w-3.5 h-3.5 text-[#A09B7C] animate-pulse" />
+          <Sparkles className="w-3.5 h-3.5 text-[#404c34] animate-pulse" />
           <span>مدل سه‌بعدی دندان آسیاب · با ماوس یا لمس بچرخانید</span>
         </div>
       </div>

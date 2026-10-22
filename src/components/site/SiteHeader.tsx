@@ -91,7 +91,7 @@ export function SiteHeader() {
         <div className="header-glass">
           {/* Brand & Tooth Symbol */}
           <Link
-            aria-label="نُوا، کلینیک دندانپزشکی، صفحه اصلی"
+            aria-label="کلینیک دندانپزشکی، صفحه اصلی"
             className="brand"
             href="/#top"
           >
@@ -106,7 +106,7 @@ export function SiteHeader() {
               </svg>
             </span>
             <span className="brand-word">
-              نُوا <small>DENTAL STUDIO</small>
+              کلینیک <small>DENTAL STUDIO</small>
             </span>
           </Link>
 

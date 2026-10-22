@@ -79,7 +79,7 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
       />
       <div 
         className="absolute bottom-10 left-10 w-80 h-80 rounded-full opacity-30 filter blur-3xl pointer-events-none -z-10"
-        style={{ background: "#A09B7C" }}
+        style={{ background: "#404c34" }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,10 +91,9 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
               <span className="sample-kicker-line" />
               <span>روایت مراجعین</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black text-[#302A21] leading-[1.3]">
-              بشنوید،
-              <br />
-              <em className="not-italic text-[#A09B7C]">از زبان خودشان.</em>
+            <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black text-[#302A21] leading-[1.3] whitespace-nowrap">
+              بشنوید،{" "}
+              <em className="not-italic text-[#404c34]">از زبان خودشان.</em>
             </h2>
           </div>
 
@@ -220,8 +219,8 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
               aria-label={`نمایش ویدئوی ${toPersian(i + 1)}`}
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 i === active
-                  ? "w-8 bg-[#A09B7C]"
-                  : "w-2.5 bg-[#d1cfbc]/60 hover:bg-[#A09B7C]/50"
+                  ? "w-8 bg-[#404c34]"
+                  : "w-2.5 bg-[#d1cfbc]/60 hover:bg-[#404c34]/50"
               }`}
             />
           ))}

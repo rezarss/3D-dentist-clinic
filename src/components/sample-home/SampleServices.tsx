@@ -57,7 +57,7 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
             <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black text-[#302A21] leading-[1.3]">
               هر لبخند،
               <br />
-              <em className="not-italic text-[#A09B7C]">مراقبتی متناسب.</em>
+              <em className="not-italic text-[#404c34]">مراقبتی متناسب.</em>
             </h2>
           </div>
 
@@ -82,6 +82,9 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
             const imgSrc = service.image || SERVICE_IMAGES[index % SERVICE_IMAGES.length];
             const tag = CATEGORY_TAGS[index % CATEGORY_TAGS.length];
             const indexStr = `${toPersian(index + 1)} / ${tag}`;
+            const badgeTheme = index % 2 === 0
+              ? "bg-[#404c34] text-white border-[#d1cfbc]/60"
+              : "bg-[#d1cfbc] text-[#293321] border-[#ece9dd]";
 
             return (
               <a
@@ -103,29 +106,28 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
                   referrerPolicy="no-referrer"
                 />
 
-                {/* Dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#24221b]/85 via-[#24221b]/20 to-transparent flex flex-col justify-between p-6 z-10 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#293321]/90 via-[#404c34]/25 to-transparent flex flex-col justify-between p-6 z-10 text-white">
                   
                   {/* Category index badge */}
                   <span 
-                    className="self-start text-[10px] font-bold tracking-widest text-[#ece9dd] bg-white/20 backdrop-blur-md border border-white/40 px-3 py-1 rounded-full uppercase"
+                    className={`self-start text-[10px] font-bold tracking-widest backdrop-blur-md border px-3 py-1 rounded-full uppercase ${badgeTheme}`}
                     dir="ltr"
                   >
                     {indexStr}
                   </span>
 
                   {/* Caption glass card */}
-                  <div className="relative p-4 pr-5 rounded-2xl bg-[#24221b]/60 backdrop-blur-md border border-white/25 shadow-lg flex items-center justify-between gap-4 mt-auto">
+                  <div className="relative p-4 pr-5 rounded-2xl bg-[#293321]/75 backdrop-blur-md border border-[#d1cfbc]/35 shadow-lg flex items-center justify-between gap-4 mt-auto">
                     <div className="text-right">
                       <h3 className="text-lg sm:text-xl font-black text-white mb-1">
                         {service.title.fa}
                       </h3>
-                      <p className="text-xs text-[#d1cfbc] line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-[#ece9dd] line-clamp-2 leading-relaxed">
                         {service.excerpt.fa || "بررسی وضعیت دهان و درمان‌های تخصصی با جدیدترین متدهای دندانپزشکی دیجیتال"}
                       </p>
                     </div>
 
-                    <div className="w-10 h-10 rounded-xl bg-white/25 border border-white/40 backdrop-blur-md flex items-center justify-center text-white shrink-0 group-hover:bg-white group-hover:text-[#625D45] transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-[#d1cfbc] border border-[#ece9dd] backdrop-blur-md flex items-center justify-center text-[#293321] shrink-0 group-hover:bg-white group-hover:text-[#404c34] transition-colors">
                       <ArrowLeft className="w-4 h-4" />
                     </div>
                   </div>

@@ -78,7 +78,7 @@ export function HomeJournal({ posts = [] }: HomeJournalProps) {
             <div className="pt-2">
               <Link
                 href="/blog"
-                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold text-[#302A21] border border-[#A09B7C]/60 hover:bg-[#A09B7C] hover:text-white transition-all duration-200"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold text-[#302A21] border border-[#404c34]/60 hover:bg-[#404c34] hover:text-white transition-all duration-200"
               >
                 <span>مشاهده همه مقالات</span>
               </Link>
@@ -96,14 +96,14 @@ export function HomeJournal({ posts = [] }: HomeJournalProps) {
                 >
                   <Link
                     href={`/blog/${article.slug}`}
-                    className="group flex flex-col justify-between rounded-2xl bg-[#FCFAF6] border border-[#E8E2D5]/70 overflow-visible hover:shadow-[0_16px_35px_rgba(160,155,124,0.18)] transition-all duration-300 text-center select-none h-full relative"
+                    className="group flex flex-col justify-between rounded-2xl bg-[#FCFAF6] border border-[#E8E2D5]/70 overflow-visible hover:shadow-[0_16px_35px_rgba(64,76,52,0.18)] transition-all duration-300 text-center select-none h-full relative"
                   >
                     <div className="flex-1 flex flex-col">
                       {/* Article Cover Image with permanent dental editorial graphic fallback */}
                       <div className="relative aspect-16/10 w-full bg-[#E8E2D5]/40 overflow-hidden shrink-0 rounded-t-2xl">
                         {/* Botanical Dental Aesthetic Fallback */}
-                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-[#A09B7C]/20 via-[#F7F4EE] to-[#D8AE98]/20">
-                          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" className="w-16 h-16 text-[#A09B7C] opacity-40">
+                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-[#404c34]/20 via-[#F7F4EE] to-[#D8AE98]/20">
+                          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" className="w-16 h-16 text-[#404c34] opacity-40">
                             <path d="M40 10C28 10 20 18 20 30c0 10 5 22 7 32 1.5 7 6 10 13 10s11.5-3 13-10c2-10 7-22 7-32 0-12-8-20-20-20z" strokeWidth="2" />
                             <path d="M30 40h20" strokeWidth="1.5" />
                           </svg>
@@ -161,7 +161,7 @@ export function HomeJournal({ posts = [] }: HomeJournalProps) {
                     </div>
 
                     {/* Bottom Link Affordance */}
-                    <div className="px-4 pb-4 pt-2.5 flex items-center justify-center gap-1.5 text-xs font-semibold text-[#A09B7C] group-hover:text-[#625D45] transition-colors mt-auto border-t border-[#E8E2D5]/30">
+                    <div className="px-4 pb-4 pt-2.5 flex items-center justify-center gap-1.5 text-xs font-semibold text-[#404c34] group-hover:text-[#625D45] transition-colors mt-auto border-t border-[#E8E2D5]/30">
                       <span>مطالعه بیشتر</span>
                       <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
                     </div>

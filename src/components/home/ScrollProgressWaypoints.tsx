@@ -61,7 +61,7 @@ export function ScrollProgressWaypoints() {
       {/* Delicate Vertical Rail */}
       <div className="w-[1px] h-20 bg-[#E8E2D5] relative overflow-hidden">
         <motion.div 
-          className="w-full bg-[#A09B7C] absolute top-0"
+          className="w-full bg-[#404c34] absolute top-0"
           style={{ height: `${scrollPercent}%` }}
         />
       </div>
@@ -81,13 +81,13 @@ export function ScrollProgressWaypoints() {
               {/* Dot */}
               <div className={`rounded-full transition-all duration-300 ${
                 isActive 
-                  ? "w-2.5 h-2.5 bg-[#625D45] scale-125 ring-4 ring-[#A09B7C]/20" 
-                  : "w-1.5 h-1.5 bg-[#817C70]/40 group-hover:bg-[#A09B7C] group-hover:scale-110"
+                  ? "w-2.5 h-2.5 bg-[#625D45] scale-125 ring-4 ring-[#404c34]/20"
+                  : "w-1.5 h-1.5 bg-[#817C70]/40 group-hover:bg-[#404c34] group-hover:scale-110"
               }`} />
 
               {/* Hover Tooltip Label - Positioned to the right of the dot */}
               <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-[#FCFAF6] border border-[#E8E2D5] text-xs font-medium text-[#302A21] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none shadow-sm flex items-center gap-2">
-                <span className="text-[#A09B7C] font-semibold">{s.num}</span>
+                <span className="text-[#404c34] font-semibold">{s.num}</span>
                 <span>{s.label}</span>
               </div>
             </button>

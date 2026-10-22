@@ -60,7 +60,7 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
             <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black text-[#302A21] leading-[1.3]">
               هر تصویر،
               <br />
-              <em className="not-italic text-[#A09B7C]">بخشی از یک مسیر.</em>
+              <em className="not-italic text-[#404c34]">بخشی از یک مسیر.</em>
             </h2>
           </div>
 
@@ -90,7 +90,7 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
                 onClick={() => setActiveCategorySlug(cat.slug)}
                 className={`px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-300 ${
                   isActive
-                    ? "bg-[#625D45] text-white shadow-md scale-102"
+                    ? "!bg-[#404c34] !text-white shadow-md scale-102"
                     : "bg-white/80 hover:bg-white text-[#625D45] border border-white/90 backdrop-blur-md"
                 }`}
               >
@@ -167,7 +167,7 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
           {/* Foot Note */}
           <div className="flex items-center justify-between pt-5 mt-5 border-t border-[#E8E2D5] text-xs text-[#756F62]">
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-[#A09B7C]" />
+              <Shield className="w-4 h-4 text-[#404c34]" />
               <span>کلیه نمونه‌کارها مستندات بالینی واقعی مراجعین کلینیک می‌باشند.</span>
             </div>
             <span className="font-bold text-[#625D45]" dir="ltr">

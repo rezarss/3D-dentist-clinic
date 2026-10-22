@@ -259,7 +259,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
       {/* Ambient Seamless Lighting Orbs */}
       <div 
         className="absolute top-1/3 left-10 w-96 h-96 rounded-full blur-[140px] opacity-25 pointer-events-none"
-        style={{ background: "#A09B7C" }}
+        style={{ background: "#404c34" }}
       />
       <div 
         className="absolute bottom-10 right-10 w-96 h-96 rounded-full blur-[140px] opacity-20 pointer-events-none"
@@ -273,7 +273,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
           <div className="text-xs font-semibold tracking-wider text-[#817C70] flex items-center justify-center gap-2">
             <span>سیستم پذیرش دیجیتال</span>
             <span className="text-[#C2BFA9]">·</span>
-            <span className="text-[#A09B7C]">نوبت‌دهی آنی</span>
+            <span className="text-[#404c34]">نوبت‌دهی آنی</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-bold text-[#302A21] tracking-tight text-balance">
@@ -296,7 +296,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
               className="flex flex-col sm:flex-row items-center justify-center gap-2 transition-colors cursor-pointer group"
             >
               <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                currentStep >= 1 ? "bg-[#A09B7C] text-white" : "bg-[#F7F4EE] text-[#817C70]"
+                currentStep >= 1 ? "bg-[#404c34] text-white" : "bg-[#F7F4EE] text-[#817C70]"
               }`}>
                 ۱
               </span>
@@ -315,7 +315,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
               className="flex flex-col sm:flex-row items-center justify-center gap-2 transition-colors cursor-pointer group"
             >
               <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                currentStep >= 2 ? "bg-[#A09B7C] text-white" : "bg-[#F7F4EE] text-[#817C70]"
+                currentStep >= 2 ? "bg-[#404c34] text-white" : "bg-[#F7F4EE] text-[#817C70]"
               }`}>
                 ۲
               </span>
@@ -330,7 +330,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
           {/* Success Screen after direct booking */}
           {bookingSuccess ? (
             <div className="py-10 text-right space-y-6 animate-in fade-in">
-              <div className="w-14 h-14 rounded-2xl bg-[#A09B7C]/20 text-[#625D45] flex items-center justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-[#404c34]/20 text-[#625D45] flex items-center justify-center">
                 <Check className="w-8 h-8 text-[#625D45]" />
               </div>
               
@@ -360,7 +360,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                 <button
                   type="button"
                   onClick={handleResetBooking}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-[#A09B7C] hover:bg-[#7F795D] transition-colors cursor-pointer shadow-xs"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-[#404c34] hover:bg-[#343F2B] transition-colors cursor-pointer shadow-xs"
                 >
                   <span>ثبت نوبت جدید</span>
                   <ArrowLeft className="w-4 h-4" />
@@ -424,7 +424,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                               })
                               .finally(() => setLoadingServices(false));
                           }}
-                          className="text-xs font-bold text-[#A09B7C] hover:underline cursor-pointer"
+                          className="text-xs font-bold text-[#404c34] hover:underline cursor-pointer"
                         >
                           تلاش مجدد برای دریافت از دیتابیس
                         </button>
@@ -445,14 +445,14 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                               aria-pressed={isSelected}
                               className={`p-5 rounded-2xl cursor-pointer transition-all duration-200 text-right flex flex-col justify-between ${
                                 isSelected
-                                  ? "bg-[#A09B7C]/15 shadow-sm border border-[#A09B7C]/30"
+                                  ? "bg-[#404c34]/15 shadow-sm border border-[#404c34]/30"
                                   : "bg-[#F7F4EE]/70 hover:bg-[#F7F4EE] border border-transparent"
                               }`}
                             >
                               <div className="flex items-center justify-between mb-3">
                                 <span className="text-xs text-[#817C70]">{srv.note}</span>
                                 <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
-                                  isSelected ? "bg-[#A09B7C] text-white" : "bg-[#E8E2D5]/60 text-transparent"
+                                  isSelected ? "bg-[#404c34] text-white" : "bg-[#E8E2D5]/60 text-transparent"
                                 }`}>
                                   <Check className="w-3 h-3 stroke-[3]" />
                                 </div>
@@ -460,7 +460,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                               <div>
                                 <h4 className="font-bold text-sm text-[#302A21]">{srv.title}</h4>
                                 <p className="text-xs text-[#817C70] mt-1 flex items-center gap-1">
-                                  <Clock className="w-3 h-3 text-[#A09B7C]" />
+                                  <Clock className="w-3 h-3 text-[#404c34]" />
                                   <span>{srv.duration}</span>
                                 </p>
                               </div>
@@ -475,7 +475,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                         type="button"
                         disabled={!selectedService || loadingServices}
                         onClick={() => setCurrentStep(2)}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-[#A09B7C] hover:bg-[#7F795D] disabled:opacity-50 transition-colors cursor-pointer shadow-xs"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-[#404c34] hover:bg-[#343F2B] disabled:opacity-50 transition-colors cursor-pointer shadow-xs"
                       >
                         <span>ادامه: انتخاب زمان نوبت</span>
                         <ArrowLeft className="w-4 h-4" />
@@ -499,21 +499,22 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                       <p className="text-xs text-[#817C70] mt-1">زمان‌های آزاد از برنامه کلینیک دریافت می‌شوند؛ پزشک پس از ثبت درخواست توسط مدیر پذیرش تعیین خواهد شد.</p>
                     </div>
 
-                    <div className="text-right">
+                    <div className="w-full max-w-xs text-right">
                       <PersianDatePicker
                         mode="date"
                         id="booking-date"
                         label="روز مراجعه"
                         value={selectedDate}
                         onChange={date => setSelectedDate(date)}
+                        minDate={getClinicToday()}
                         clearable={false}
                       />
                     </div>
 
                     {loadingAvailability ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
                         {[1, 2, 3, 4].map(index => (
-                          <div key={index} className="p-5 rounded-2xl bg-[#F7F4EE] animate-pulse h-16" />
+                          <div key={index} className="p-3 rounded-2xl bg-[#F7F4EE] animate-pulse h-14" />
                         ))}
                       </div>
                     ) : availabilityError ? (
@@ -525,7 +526,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                         برای این روز زمان آزادی وجود ندارد؛ لطفاً روز دیگری را انتخاب کنید.
                       </div>
                     ) : (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
                         {availableSlots.filter(slot => slot.available).map(slot => {
                           const isSelected = selectedSlot?.start === slot.start;
                           return (
@@ -537,18 +538,18 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                                 setSubmitError("");
                               }}
                               aria-pressed={isSelected}
-                              className={`p-5 rounded-2xl cursor-pointer transition-all duration-200 text-right flex items-center justify-between gap-4 ${
+                              className={`min-w-0 p-3 rounded-2xl cursor-pointer transition-all duration-200 text-right flex items-center justify-between gap-2 ${
                                 isSelected
-                                  ? "bg-[#A09B7C]/15 shadow-sm border border-[#A09B7C]/30"
+                                  ? "bg-[#404c34]/15 shadow-sm border border-[#404c34]/30"
                                   : "bg-[#F7F4EE]/70 hover:bg-[#F7F4EE] border border-transparent"
                               }`}
                             >
-                              <div className="flex items-center gap-3">
-                                <Clock className="w-4 h-4 text-[#A09B7C]" />
-                                <span className="text-sm font-semibold text-[#302A21]">{slot.label}</span>
+                              <div className="flex min-w-0 items-center gap-2">
+                                <Clock className="w-3.5 h-3.5 text-[#404c34] shrink-0" />
+                                <span className="text-xs font-semibold text-[#302A21] whitespace-nowrap" dir="ltr">{slot.label}</span>
                               </div>
-                              <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all ${
-                                isSelected ? "bg-[#A09B7C] text-white" : "bg-[#E8E2D5]/60 text-transparent"
+                              <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 transition-all ${
+                                isSelected ? "bg-[#404c34] text-white" : "bg-[#E8E2D5]/60 text-transparent"
                               }`}>
                                 <Check className="w-3 h-3 stroke-[3]" />
                               </div>
@@ -583,7 +584,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <label className="text-xs font-medium text-[#756F62] flex items-center gap-1.5">
-                            <User className="w-3.5 h-3.5 text-[#A09B7C]" />
+                            <User className="w-3.5 h-3.5 text-[#404c34]" />
                             <span>نام و نام خانوادگی *</span>
                           </label>
                           <input
@@ -592,13 +593,13 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                             placeholder="مثال: سارا محمدی"
                             value={patientName}
                             onChange={e => setPatientName(e.target.value)}
-                            className="w-full px-4 py-2.5 rounded-xl bg-[#F7F4EE] border border-[#E8E2D5] text-xs sm:text-sm text-[#302A21] focus:outline-hidden focus:border-[#A09B7C]"
+                            className="w-full px-4 py-2.5 rounded-xl bg-[#F7F4EE] border border-[#E8E2D5] text-xs sm:text-sm text-[#302A21] focus:outline-hidden focus:border-[#404c34]"
                           />
                         </div>
 
                         <div className="space-y-1">
                           <label className="text-xs font-medium text-[#756F62] flex items-center gap-1.5">
-                            <Phone className="w-3.5 h-3.5 text-[#A09B7C]" />
+                            <Phone className="w-3.5 h-3.5 text-[#404c34]" />
                             <span>شماره موبایل *</span>
                           </label>
                           <input
@@ -608,14 +609,14 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                             placeholder="09123456789"
                             value={patientPhone}
                             onChange={e => setPatientPhone(e.target.value)}
-                            className="w-full px-4 py-2.5 rounded-xl bg-[#F7F4EE] border border-[#E8E2D5] text-xs sm:text-sm text-[#302A21] focus:outline-hidden focus:border-[#A09B7C]"
+                            className="w-full px-4 py-2.5 rounded-xl bg-[#F7F4EE] border border-[#E8E2D5] text-xs sm:text-sm text-[#302A21] focus:outline-hidden focus:border-[#404c34]"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-1">
                         <label className="text-xs font-medium text-[#756F62] flex items-center gap-1.5">
-                          <FileText className="w-3.5 h-3.5 text-[#A09B7C]" />
+                          <FileText className="w-3.5 h-3.5 text-[#404c34]" />
                           <span>توضیحات و ترجیحات (اختیاری)</span>
                         </label>
                         <input
@@ -623,7 +624,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                           placeholder="مثلاً: حساسیت دارویی، ترجیح ساعت دقیق‌تر و..."
                           value={patientNote}
                           onChange={e => setPatientNote(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl bg-[#F7F4EE] border border-[#E8E2D5] text-xs sm:text-sm text-[#302A21] focus:outline-hidden focus:border-[#A09B7C]"
+                          className="w-full px-4 py-2.5 rounded-xl bg-[#F7F4EE] border border-[#E8E2D5] text-xs sm:text-sm text-[#302A21] focus:outline-hidden focus:border-[#404c34]"
                         />
                       </div>
 
@@ -640,7 +641,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
                           <button
                             type="submit"
                             disabled={submitting || !selectedSlot || loadingAvailability}
-                            className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#A09B7C] hover:bg-[#7F795D] disabled:opacity-50 transition-colors cursor-pointer shadow-[0_6px_20px_rgba(160,155,124,0.3)]"
+                            className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#404c34] hover:bg-[#343F2B] disabled:opacity-50 transition-colors cursor-pointer shadow-[0_6px_20px_rgba(64,76,52,0.3)]"
                           >
                             {submitting ? (
                               <>

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
 
 export type FormattedDoctor = {
   _id: string;
@@ -11,7 +10,6 @@ export type FormattedDoctor = {
   specialty?: string;
   medicalCode?: string;
   university?: string;
-  clinicDays?: string;
   image?: string;
 };
 
@@ -42,7 +40,7 @@ export function SampleDoctors({ doctors }: SampleDoctorsProps) {
             <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black text-[#302A21] leading-[1.3]">
               تخصص،
               <br />
-              <em className="not-italic text-[#A09B7C]">با چهره‌ای آشنا.</em>
+              <em className="not-italic text-[#404c34]">با چهره‌ای آشنا.</em>
             </h2>
           </div>
 
@@ -81,7 +79,7 @@ export function SampleDoctors({ doctors }: SampleDoctorsProps) {
                 {/* Details */}
                 <div className="p-6 text-right flex flex-col justify-between flex-1">
                   <div>
-                    <span className="text-[11px] font-bold text-[#A09B7C] block mb-1">
+                    <span className="text-[11px] font-bold text-[#404c34] block mb-1">
                       {doc.medicalCode || "کادر تخصصی کلینیک"}
                     </span>
                     <h3 className="text-xl font-black text-[#302A21] mb-2">
@@ -92,18 +90,6 @@ export function SampleDoctors({ doctors }: SampleDoctorsProps) {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#E8E2D5] flex items-center justify-between">
-                    <span className="text-[11px] text-[#8A8476]">
-                      {doc.clinicDays || "برنامه حضور در کلینیک"}
-                    </span>
-                    <a
-                      href="#appointment"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#625D45] hover:text-[#302A21] group/link transition"
-                    >
-                      <span>درخواست نوبت</span>
-                      <ArrowLeft className="w-3.5 h-3.5 group-hover/link:-translate-x-1 transition-transform" />
-                    </a>
-                  </div>
                 </div>
 
               </article>

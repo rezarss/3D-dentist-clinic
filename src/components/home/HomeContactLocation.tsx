@@ -30,7 +30,7 @@ export function HomeContactLocation() {
       {/* Seamless Ambient Light */}
       <div 
         className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full blur-[150px] opacity-20 pointer-events-none"
-        style={{ background: "#A09B7C" }}
+        style={{ background: "#404c34" }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -40,7 +40,7 @@ export function HomeContactLocation() {
           <div className="text-xs font-semibold tracking-wider text-[#817C70] flex items-center justify-center gap-2">
             <span>اطلاعات تماس و نشانی</span>
             <span className="text-[#C2BFA9]">·</span>
-            <span className="text-[#A09B7C]">موقعیت مکانی کلینیک</span>
+            <span className="text-[#404c34]">موقعیت مکانی کلینیک</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-bold text-[#302A21] tracking-tight text-balance">
@@ -65,20 +65,20 @@ export function HomeContactLocation() {
                 {/* Working Hours */}
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#625D45]">
-                    <Clock className="w-4 h-4 text-[#A09B7C]" />
+                    <Clock className="w-4 h-4 text-[#404c34]" />
                     <span>ساعات کاری پذیرش کلینیک</span>
                   </div>
                   <div className="space-y-1 text-xs text-[#817C70] pr-6">
                     <p>شنبه تا چهارشنبه: <strong className="text-[#302A21] font-semibold">۸:۳۰ الی ۲۱:۰۰</strong></p>
                     <p>پنج‌شنبه‌ها: <strong className="text-[#302A21] font-semibold">۸:۳۰ الی ۱۸:۰۰</strong></p>
-                    <p>جمعه‌ها و تعطیلات: <strong className="text-[#A09B7C] font-semibold">پذیرش اورژانس ۱۰ الی ۱۶</strong></p>
+                    <p>جمعه‌ها و تعطیلات: <strong className="text-[#404c34] font-semibold">پذیرش اورژانس ۱۰ الی ۱۶</strong></p>
                   </div>
                 </div>
 
                 {/* Direct Contacts */}
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#625D45]">
-                    <Phone className="w-4 h-4 text-[#A09B7C]" />
+                    <Phone className="w-4 h-4 text-[#404c34]" />
                     <span>خطوط تلفن مستقیم</span>
                   </div>
                   <div className="space-y-1 text-xs text-[#817C70] pr-6">
@@ -93,7 +93,7 @@ export function HomeContactLocation() {
               {/* Exact Address & Transit */}
               <div className="pt-6 border-t border-[#E8E2D5]/40 space-y-4">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#A09B7C] shrink-0 mt-0.5" />
+                  <MapPin className="w-5 h-5 text-[#404c34] shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-sm text-[#302A21]">نشانی دقیق کلینیک:</h3>
                     <p className="text-xs text-[#817C70] leading-relaxed mt-1">
@@ -105,11 +105,11 @@ export function HomeContactLocation() {
                 {/* Transit details (clean unboxed) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   <div className="p-4 rounded-2xl bg-[#F7F4EE] flex items-center gap-2.5 text-xs">
-                    <Car className="w-4 h-4 text-[#A09B7C] shrink-0" />
+                    <Car className="w-4 h-4 text-[#404c34] shrink-0" />
                     <span className="text-[#817C70]">پارکینگ اختصاصی رایگان برای مراجعین</span>
                   </div>
                   <div className="p-4 rounded-2xl bg-[#F7F4EE] flex items-center gap-2.5 text-xs">
-                    <Train className="w-4 h-4 text-[#A09B7C] shrink-0" />
+                    <Train className="w-4 h-4 text-[#404c34] shrink-0" />
                     <span className="text-[#817C70]">دسترسی ۵ دقیقه‌ای به ایستگاه BRT ونک</span>
                   </div>
                 </div>
@@ -121,27 +121,27 @@ export function HomeContactLocation() {
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2.5 rounded-full bg-[#F7F4EE] hover:bg-[#A09B7C] hover:text-white text-xs font-semibold text-[#302A21] inline-flex items-center gap-1.5 transition-all"
+                  className="px-4 py-2.5 rounded-full bg-[#F7F4EE] hover:bg-[#404c34] hover:text-white text-xs font-semibold text-[#302A21] inline-flex items-center gap-1.5 transition-all"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#A09B7C]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#404c34]" />
                   <span>مسیریابی در گوگل مپ</span>
                 </a>
                 <a
                   href="https://nshn.ir"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2.5 rounded-full bg-[#F7F4EE] hover:bg-[#A09B7C] hover:text-white text-xs font-semibold text-[#302A21] inline-flex items-center gap-1.5 transition-all"
+                  className="px-4 py-2.5 rounded-full bg-[#F7F4EE] hover:bg-[#404c34] hover:text-white text-xs font-semibold text-[#302A21] inline-flex items-center gap-1.5 transition-all"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#A09B7C]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#404c34]" />
                   <span>مسیریابی با نشان</span>
                 </a>
                 <a
                   href="https://balad.ir"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2.5 rounded-full bg-[#F7F4EE] hover:bg-[#A09B7C] hover:text-white text-xs font-semibold text-[#302A21] inline-flex items-center gap-1.5 transition-all"
+                  className="px-4 py-2.5 rounded-full bg-[#F7F4EE] hover:bg-[#404c34] hover:text-white text-xs font-semibold text-[#302A21] inline-flex items-center gap-1.5 transition-all"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#A09B7C]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#404c34]" />
                   <span>مسیریابی با بلد</span>
                 </a>
               </div>
@@ -155,7 +155,7 @@ export function HomeContactLocation() {
             <div className="p-7 sm:p-9 rounded-3xl bg-[#FCFAF6] shadow-[0_20px_50px_rgba(48,42,33,0.04)] text-right space-y-5">
               
               <div className="space-y-1">
-                <span className="text-xs font-semibold text-[#A09B7C]">مشاوره اختصاصی تلفنی</span>
+                <span className="text-xs font-semibold text-[#404c34]">مشاوره اختصاصی تلفنی</span>
                 <h3 className="text-xl font-bold text-[#302A21]">
                   درخواست تماس کارشناس پذیرش
                 </h3>
@@ -168,10 +168,10 @@ export function HomeContactLocation() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-6 rounded-2xl bg-[#A09B7C]/15 text-right space-y-3"
+                  className="p-6 rounded-2xl bg-[#404c34]/15 text-right space-y-3"
                 >
                   <div className="flex items-center gap-2 text-[#625D45] font-bold text-sm">
-                    <CheckCircle className="w-5 h-5 text-[#A09B7C]" />
+                    <CheckCircle className="w-5 h-5 text-[#404c34]" />
                     <span>درخواست شما با موفقیت ثبت شد</span>
                   </div>
                   <p className="text-xs text-[#817C70] leading-relaxed">
@@ -183,7 +183,7 @@ export function HomeContactLocation() {
                       setPhone("");
                       setFullName("");
                     }}
-                    className="text-xs font-bold text-[#A09B7C] hover:underline pt-2 block"
+                    className="text-xs font-bold text-[#404c34] hover:underline pt-2 block"
                   >
                     ثبت درخواست شماره دیگر
                   </button>
@@ -197,7 +197,7 @@ export function HomeContactLocation() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="مثال: مریم کریمی"
-                      className="w-full px-4 py-3 rounded-2xl bg-[#F7F4EE] border-0 text-sm text-[#302A21] placeholder-[#817C70]/50 focus:outline-none focus:ring-2 focus:ring-[#A09B7C]/40"
+                      className="w-full px-4 py-3 rounded-2xl bg-[#F7F4EE] border-0 text-sm text-[#302A21] placeholder-[#817C70]/50 focus:outline-none focus:ring-2 focus:ring-[#404c34]/40"
                     />
                   </div>
 
@@ -209,7 +209,7 @@ export function HomeContactLocation() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="۰۹۱۲۳۴۵۶۷۸۹"
-                      className="w-full px-4 py-3 rounded-2xl bg-[#F7F4EE] border-0 text-sm text-[#302A21] placeholder-[#817C70]/50 focus:outline-none focus:ring-2 focus:ring-[#A09B7C]/40 dir-ltr text-right"
+                      className="w-full px-4 py-3 rounded-2xl bg-[#F7F4EE] border-0 text-sm text-[#302A21] placeholder-[#817C70]/50 focus:outline-none focus:ring-2 focus:ring-[#404c34]/40 dir-ltr text-right"
                     />
                   </div>
 
@@ -218,7 +218,7 @@ export function HomeContactLocation() {
                     <select
                       value={service}
                       onChange={(e) => setService(e.target.value)}
-                      className="w-full px-4 py-3 rounded-2xl bg-[#F7F4EE] border-0 text-sm text-[#302A21] focus:outline-none focus:ring-2 focus:ring-[#A09B7C]/40 cursor-pointer"
+                      className="w-full px-4 py-3 rounded-2xl bg-[#F7F4EE] border-0 text-sm text-[#302A21] focus:outline-none focus:ring-2 focus:ring-[#404c34]/40 cursor-pointer"
                     >
                       <option value="مشاوره ایمپلنت دیجیتال">مشاوره ایمپلنت دیجیتال</option>
                       <option value="اصلاح طرح لبخند و لمینت">اصلاح طرح لبخند و لمینت</option>
@@ -231,7 +231,7 @@ export function HomeContactLocation() {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-full bg-[#A09B7C] hover:bg-[#7F795D] active:bg-[#625D45] text-white text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(160,155,124,0.3)] mt-2"
+                    className="w-full py-3.5 rounded-full bg-[#404c34] hover:bg-[#343F2B] active:bg-[#625D45] text-white text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(64,76,52,0.3)] mt-2"
                   >
                     <Send className="w-4 h-4" />
                     <span>ارسال درخواست تماس کارشناس</span>

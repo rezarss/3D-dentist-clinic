@@ -40,7 +40,7 @@ export function ArticleModal({ isOpen, onClose, article }: ArticleModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E2D5] bg-[#FCFAF6]">
-          <span className="text-xs font-bold text-[#A09B7C]">
+          <span className="text-xs font-bold text-[#404c34]">
             مجله دندانپزشکی · {article.category || "مقاله آموزشی"}
           </span>
           <button
@@ -100,7 +100,7 @@ export function ArticleModal({ isOpen, onClose, article }: ArticleModalProps) {
           <a
             href="#appointment"
             onClick={onClose}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#625D45] text-white text-xs font-bold hover:bg-[#7F795D] transition"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#625D45] text-white text-xs font-bold hover:bg-[#343F2B] transition"
           >
             <span>درخواست مشاوره درباره این درمان</span>
             <ArrowLeft className="w-3.5 h-3.5" />

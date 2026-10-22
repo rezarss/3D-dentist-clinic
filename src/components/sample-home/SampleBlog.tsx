@@ -50,7 +50,7 @@ export function SampleBlog({ posts }: SampleBlogProps) {
             <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black text-[#302A21] leading-[1.3]">
               دانستنی‌های کوچک،
               <br />
-              <em className="not-italic text-[#A09B7C]">اثرهای بزرگ.</em>
+              <em className="not-italic text-[#404c34]">اثرهای بزرگ.</em>
             </h2>
           </div>
 

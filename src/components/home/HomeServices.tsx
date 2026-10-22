@@ -117,7 +117,7 @@ export function HomeServices({ services = [] }: HomeServicesProps) {
       
       {/* Decorative Botanical & Sculpture Motif on far left edge */}
       <div className="absolute top-1/2 -left-12 -translate-y-1/2 w-72 h-96 pointer-events-none opacity-20 hidden xl:block">
-        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-[#A09B7C]">
+        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-[#404c34]">
           <path d="M30 250C30 180 80 120 150 70C120 140 100 200 30 250Z" fill="currentColor" opacity="0.4" />
           <path d="M10 210C40 160 90 120 160 90C120 160 80 200 10 210Z" fill="currentColor" opacity="0.25" />
           <circle cx="140" cy="80" r="45" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.4" />
@@ -144,7 +144,7 @@ export function HomeServices({ services = [] }: HomeServicesProps) {
             <div className="pt-2">
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold text-[#302A21] border border-[#A09B7C]/60 hover:bg-[#A09B7C] hover:text-white transition-all duration-200"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold text-[#302A21] border border-[#404c34]/60 hover:bg-[#404c34] hover:text-white transition-all duration-200"
               >
                 <span>مشاهده همه خدمات</span>
               </Link>
@@ -165,7 +165,7 @@ export function HomeServices({ services = [] }: HomeServicesProps) {
                 >
                   <Link
                     href={`/services/${service.slug}`}
-                    className="group relative flex flex-col items-center justify-between p-6 h-40 sm:h-44 rounded-2xl bg-[#FCFAF6] border border-[#E8E2D5]/70 hover:border-[#A09B7C]/60 hover:shadow-[0_12px_30px_rgba(160,155,124,0.15)] transition-all duration-300 text-center select-none"
+                    className="group relative flex flex-col items-center justify-between p-6 h-40 sm:h-44 rounded-2xl bg-[#FCFAF6] border border-[#E8E2D5]/70 hover:border-[#404c34]/60 hover:shadow-[0_12px_30px_rgba(64,76,52,0.15)] transition-all duration-300 text-center select-none"
                   >
                     {/* Outline Tooth Icon */}
                     <div className="text-[#302A21] group-hover:text-[#625D45] transition-colors mt-2">

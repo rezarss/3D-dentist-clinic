@@ -96,7 +96,7 @@ export function SampleCollapsibleGuideFaq() {
                 <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black text-[#302A21] leading-[1.3]">
                   از اولین تماس تا
                   <br />
-                  <em className="not-italic text-[#A09B7C]">آخرین مرحله مراقبت.</em>
+                  <em className="not-italic text-[#404c34]">آخرین مرحله مراقبت.</em>
                 </h2>
               </div>
 
@@ -213,7 +213,7 @@ export function SampleCollapsibleGuideFaq() {
                 <h2 className="text-3xl sm:text-4xl font-black text-[#302A21] leading-[1.3] mb-4">
                   پرسش‌های شما،
                   <br />
-                  <em className="not-italic text-[#A09B7C]">پاسخ‌های روشن.</em>
+                  <em className="not-italic text-[#404c34]">پاسخ‌های روشن.</em>
                 </h2>
                 <p className="text-sm text-[#756F62] leading-relaxed mb-6">
                   دانستن چند نکته ساده درباره روند معاینه، نحوه انتخاب درمان و مراقبت‌های بعد از آن به برنامه‌ریزی بهتر شما کمک شایانی خواهد کرد.
@@ -244,7 +244,7 @@ export function SampleCollapsibleGuideFaq() {
                         className="w-full text-right p-5 flex items-center justify-between gap-4 font-bold text-xs sm:text-sm text-[#302A21]"
                       >
                         <div className="flex items-center gap-3">
-                          <HelpCircle className="w-4 h-4 text-[#A09B7C] shrink-0" />
+                          <HelpCircle className="w-4 h-4 text-[#404c34] shrink-0" />
                           <span>{faq.q}</span>
                         </div>
                         <span className={`w-7 h-7 rounded-lg bg-[#F7F4EE] flex items-center justify-center text-[#625D45] shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`}>
@@ -272,10 +272,9 @@ export function SampleCollapsibleGuideFaq() {
               <button
                 type="button"
                 onClick={() => setIsExpanded(true)}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white shadow-xl transition hover:scale-105"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white bg-[#404c34] hover:bg-[#343F2B] shadow-xl transition hover:scale-105"
                 style={{ 
-                  background: "linear-gradient(140deg, #625D45, #343128)",
-                  boxShadow: "0 10px 25px rgba(98, 93, 69, 0.35)"
+                  boxShadow: "0 10px 25px rgba(64,76,52, 0.35)"
                 }}
               >
                 <span>مشاهده توضیحات کامل و سوالات متداول (نمایش بیشتر)</span>

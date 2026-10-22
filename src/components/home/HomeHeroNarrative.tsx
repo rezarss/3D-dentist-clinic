@@ -87,7 +87,7 @@ export function HomeHeroNarrative() {
       <div 
         className="absolute -inset-8 pointer-events-none rounded-full blur-[100px] opacity-35"
         style={{
-          background: "radial-gradient(circle, #D8AE98 0%, #A09B7C 35%, transparent 70%)"
+          background: "radial-gradient(circle, #D8AE98 0%, #404c34 35%, transparent 70%)"
         }}
       />
 

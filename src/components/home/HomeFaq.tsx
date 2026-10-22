@@ -58,7 +58,7 @@ export function HomeFaq() {
       {/* Seamless Ambient Light */}
       <div 
         className="absolute top-1/2 right-1/4 w-96 h-96 rounded-full blur-[150px] opacity-20 pointer-events-none"
-        style={{ background: "#A09B7C" }}
+        style={{ background: "#404c34" }}
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -66,10 +66,10 @@ export function HomeFaq() {
         {/* Section Header */}
         <div className="text-center mb-14 space-y-4">
           <div className="text-xs font-semibold tracking-wider text-[#817C70] flex items-center justify-center gap-2">
-            <HelpCircle className="w-4 h-4 text-[#A09B7C]" />
+            <HelpCircle className="w-4 h-4 text-[#404c34]" />
             <span>پاسخ به سوالات مراجعین</span>
             <span className="text-[#C2BFA9]">·</span>
-            <span className="text-[#A09B7C]">راهنمای جامع بالینی</span>
+            <span className="text-[#404c34]">راهنمای جامع بالینی</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-bold text-[#302A21] tracking-tight text-balance">
@@ -90,8 +90,8 @@ export function HomeFaq() {
                 key={faq.id}
                 className={`rounded-3xl bg-[#FCFAF6] border transition-all duration-200 overflow-hidden text-right ${
                   isOpen 
-                    ? "border-[#A09B7C]/50 shadow-[0_16px_40px_rgba(160,155,124,0.12)] ring-1 ring-[#A09B7C]/20" 
-                    : "border-[#E8E2D5]/40 shadow-[0_4px_16px_rgba(48,42,33,0.02)] hover:border-[#A09B7C]/30"
+                    ? "border-[#404c34]/50 shadow-[0_16px_40px_rgba(64,76,52,0.12)] ring-1 ring-[#404c34]/20"
+                    : "border-[#E8E2D5]/40 shadow-[0_4px_16px_rgba(48,42,33,0.02)] hover:border-[#404c34]/30"
                 }`}
               >
                 <button
@@ -112,7 +112,7 @@ export function HomeFaq() {
                   </div>
 
                   <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                    isOpen ? "rotate-180 bg-[#A09B7C] text-white shadow-xs" : "bg-[#F7F4EE] text-[#817C70]"
+                    isOpen ? "rotate-180 bg-[#404c34] text-white shadow-xs" : "bg-[#F7F4EE] text-[#817C70]"
                   }`}>
                     <ChevronDown className="w-4 h-4" />
                   </div>
@@ -135,14 +135,14 @@ export function HomeFaq() {
         <div className="mt-12 text-center p-8 rounded-3xl bg-[#FCFAF6] border border-[#E8E2D5]/50 shadow-[0_12px_40px_rgba(48,42,33,0.03)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-right">
             <h4 className="font-bold text-base text-[#302A21] flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#A09B7C]" />
+              <Sparkles className="w-4 h-4 text-[#404c34]" />
               <span>سوال دیگری درباره درمان خود دارید؟</span>
             </h4>
             <p className="text-xs text-[#817C70] mt-1">مشاوران پزشکی ما آماده پاسخگویی صبورانه به تمامی سوالات شما هستند.</p>
           </div>
           <a
             href="tel:02188880120"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-[#A09B7C] hover:bg-[#7F795D] transition-colors whitespace-nowrap shadow-xs"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-[#404c34] hover:bg-[#343F2B] transition-colors whitespace-nowrap shadow-xs"
           >
             <PhoneCall className="w-4 h-4" />
             <span>تماس فوری با پذیرش</span>

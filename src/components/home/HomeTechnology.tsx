@@ -64,22 +64,22 @@ export function HomeTechnology() {
       />
       <div 
         className="absolute bottom-10 left-10 w-80 h-80 rounded-full blur-[120px] opacity-20 pointer-events-none"
-        style={{ background: "#A09B7C" }}
+        style={{ background: "#404c34" }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col items-start space-y-4 max-w-2xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A09B7C]/15 text-[#625D45] text-xs font-semibold">
-            <Scan className="w-3.5 h-3.5 text-[#A09B7C]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#404c34]/15 text-[#625D45] text-xs font-semibold">
+            <Scan className="w-3.5 h-3.5 text-[#404c34]" />
             <span>اسکرول تریگر · معماری دیجیتال کلینیک</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#302A21] leading-tight tracking-tight">
             دقت میکرونی با تکنولوژی
             <br />
-            <span className="text-[#A09B7C]">سه‌بعدی و هوش مصنوعی</span>
+            <span className="text-[#404c34]">سه‌بعدی و هوش مصنوعی</span>
           </h2>
 
           <p className="text-sm sm:text-base text-[#817C70] leading-relaxed">
@@ -102,14 +102,14 @@ export function HomeTechnology() {
                   onClick={() => setActiveFeature(idx)}
                   className={`p-6 sm:p-7 rounded-3xl cursor-pointer transition-all duration-300 border opacity-100 ${
                     isActive 
-                      ? "bg-[#FCFAF6] border-[#A09B7C] shadow-[0_16px_40px_rgba(160,155,124,0.14)]" 
-                      : "bg-[#FCFAF6]/60 border-[#E8E2D5]/70 hover:border-[#A09B7C]/50 hover:bg-[#FCFAF6]"
+                      ? "bg-[#FCFAF6] border-[#404c34] shadow-[0_16px_40px_rgba(64,76,52,0.14)]"
+                      : "bg-[#FCFAF6]/60 border-[#E8E2D5]/70 hover:border-[#404c34]/50 hover:bg-[#FCFAF6]"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3.5">
                       <div className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-colors ${
-                        isActive ? "bg-[#625D45] text-white" : "bg-[#A09B7C]/15 text-[#625D45]"
+                        isActive ? "bg-[#625D45] text-white" : "bg-[#404c34]/15 text-[#625D45]"
                       }`}>
                         <Icon className="w-5 h-5" />
                       </div>
@@ -123,7 +123,7 @@ export function HomeTechnology() {
                       </div>
                     </div>
 
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#A09B7C]/10 text-[#625D45] whitespace-nowrap">
+                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#404c34]/10 text-[#625D45] whitespace-nowrap">
                       {feature.badge}
                     </span>
                   </div>
@@ -142,7 +142,7 @@ export function HomeTechnology() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                         {feature.specs.map((spec) => (
                           <div key={spec} className="flex items-center gap-2 text-xs text-[#302A21] font-medium">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#A09B7C] shrink-0" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#404c34] shrink-0" />
                             <span>{spec}</span>
                           </div>
                         ))}
@@ -159,14 +159,14 @@ export function HomeTechnology() {
             <div className="relative w-full max-w-lg aspect-square flex flex-col items-center justify-center p-4 sm:p-8 text-center">
               
               {/* Concentric Circular Dashed Rings in Background */}
-              <div className="absolute inset-0 rounded-full border border-dashed border-[#A09B7C]/45 pointer-events-none" />
-              <div className="absolute inset-8 rounded-full border border-dashed border-[#A09B7C]/35 pointer-events-none" />
+              <div className="absolute inset-0 rounded-full border border-dashed border-[#404c34]/45 pointer-events-none" />
+              <div className="absolute inset-8 rounded-full border border-dashed border-[#404c34]/35 pointer-events-none" />
               <div className="absolute inset-16 rounded-full border border-dashed border-[#D8AE98]/40 pointer-events-none" />
-              <div className="absolute inset-28 rounded-full border border-dashed border-[#A09B7C]/25 pointer-events-none" />
+              <div className="absolute inset-28 rounded-full border border-dashed border-[#404c34]/25 pointer-events-none" />
 
               {/* High-Tech Precision Telemetry Display */}
               <div className="relative z-10 space-y-5 max-w-sm w-full">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#A09B7C]/15 text-xs font-semibold text-[#625D45]">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#404c34]/15 text-xs font-semibold text-[#625D45]">
                   <Sparkles className="w-3.5 h-3.5 text-[#D8AE98]" />
                   <span>دقت دیجیتال · {features[activeFeature].badge}</span>
                 </div>
@@ -190,7 +190,7 @@ export function HomeTechnology() {
                       <div className="text-2xl sm:text-3xl font-bold font-mono text-[#F7F4EE] tracking-wider">
                         99.8%
                       </div>
-                      <div className="text-[11px] text-[#A09B7C] mt-0.5">
+                      <div className="text-[11px] text-[#404c34] mt-0.5">
                         {features[activeFeature].title}
                       </div>
                     </div>
@@ -213,7 +213,7 @@ export function HomeTechnology() {
                     className="inline-flex items-center gap-2 text-xs font-semibold text-[#625D45] hover:text-[#302A21] transition-colors"
                   >
                     <span>رزرو اسکن دیجیتال در ویزیت اول</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#A09B7C]" />
+                    <ArrowUpRight className="w-4 h-4 text-[#404c34]" />
                   </Link>
                 </div>
               </div>

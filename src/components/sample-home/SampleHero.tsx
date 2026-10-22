@@ -16,19 +16,19 @@ export function SampleHero() {
           {/* Right Column: Hero Text */}
           <div className="lg:col-span-6 flex flex-col items-start text-right z-10">
             <div className="sample-eyebrow mb-5">
-              <span className="w-2 h-2 rounded-full bg-[#A09B7C] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#404c34] animate-pulse" />
               <span>به کلینیک تخصصی دندانپزشکی خوش آمدید</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black leading-[1.35] tracking-tight text-[#302A21] mb-6">
               آرامش در درمان،
               <br />
-              <span className="font-light text-[#7F795D]">زیبایی در </span>
+              <span className="font-light text-[#343F2B]">زیبایی در </span>
               <span className="relative inline-block text-[#302A21]">
                 لبخند شما.
                 <span 
                   className="absolute bottom-1 right-0 left-0 h-3.5 -z-10 rounded-full opacity-60 -rotate-1"
-                  style={{ background: "linear-gradient(90deg, #d1cfbc, #A09B7C)" }}
+                  style={{ background: "linear-gradient(90deg, #d1cfbc, #404c34)" }}
                 />
               </span>
             </h1>
@@ -40,27 +40,26 @@ export function SampleHero() {
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
               <a
                 href="#appointment"
-                className="inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-2xl text-sm font-bold text-white shadow-lg transition-transform hover:-translate-y-1"
+                className="inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-2xl text-sm font-bold !text-white bg-[#404c34] hover:bg-[#343F2B] shadow-lg transition-all hover:-translate-y-1"
                 style={{ 
-                  background: "linear-gradient(140deg, #625D45, #343128)",
-                  boxShadow: "0 12px 30px rgba(98, 93, 69, 0.25)"
+                  boxShadow: "0 12px 30px rgba(64,76,52, 0.25)"
                 }}
               >
-                <span>درخواست مشاوره</span>
-                <ArrowLeft className="w-4 h-4" />
+                <span className="!text-white" style={{ color: "#ffffff" }}>درخواست مشاوره</span>
+                <ArrowLeft className="w-4 h-4 !text-white" />
               </a>
 
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-2xl text-sm font-bold text-[#302A21] border border-white/80 bg-white/70 backdrop-blur-md shadow-sm transition-transform hover:-translate-y-1 hover:bg-white"
+                className="inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-2xl text-sm font-bold text-[#302A21] bg-[#d1cfbc] hover:bg-[#c3c0aa] shadow-lg transition-all hover:-translate-y-1"
               >
                 <span>آشنایی با خدمات</span>
-                <ArrowLeft className="w-4 h-4 text-[#A09B7C]" />
+                <ArrowLeft className="w-4 h-4" />
               </a>
             </div>
 
             <div className="flex items-center gap-2 mt-8 text-xs text-[#8A8476]">
-              <span className="w-2 h-2 rounded-full bg-[#A09B7C]" />
+              <span className="w-2 h-2 rounded-full bg-[#404c34]" />
               <span>نوبت‌دهی آنلاین ۲۴ ساعته · مشاوره اولیه اختصاصی</span>
             </div>
           </div>
@@ -72,7 +71,7 @@ export function SampleHero() {
               {/* Backing decorative glow */}
               <div 
                 className="absolute inset-4 -inset-y-4 rounded-3xl opacity-75 filter blur-xl -z-10"
-                style={{ background: "radial-gradient(circle at 60% 40%, #d1cfbc, #A09B7C)" }}
+                style={{ background: "radial-gradient(circle at 60% 40%, #d1cfbc, #404c34)" }}
               />
 
               {/* Main Photo Frame */}
@@ -102,7 +101,7 @@ export function SampleHero() {
               {/* Floating Glass Pill on top-left */}
               <div className="sample-float-glass">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d1cfbc] to-white text-[#625D45] flex items-center justify-center shadow-xs shrink-0">
-                  <Sparkles className="w-5 h-5 text-[#A09B7C]" />
+                  <Sparkles className="w-5 h-5 text-[#404c34]" />
                 </div>
                 <div className="text-right">
                   <strong className="block text-xs font-bold text-[#302A21] whitespace-nowrap">
@@ -116,7 +115,7 @@ export function SampleHero() {
 
               {/* Side watermark word */}
               <div 
-                className="absolute -bottom-7 left-6 text-[10px] font-black tracking-[0.2em] text-[#A09B7C]/40 uppercase select-none pointer-events-none"
+                className="absolute -bottom-7 left-6 text-[10px] font-black tracking-[0.2em] text-[#404c34]/40 uppercase select-none pointer-events-none"
                 dir="ltr"
               >
                 SMILE IN DETAILS
@@ -129,25 +128,25 @@ export function SampleHero() {
         {/* Micro Strip with 4 Pillars */}
         <div className="mt-14 sample-micro-strip flex flex-wrap items-center justify-between gap-4 text-xs font-bold text-[#625D45]">
           <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#A09B7C]" />
+            <Check className="w-4 h-4 text-[#404c34]" />
             <span>توضیح روشن مراحل درمان</span>
           </div>
           <span className="hidden md:block w-px h-5 bg-[#E8E2D5]" />
           
           <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#A09B7C]" />
+            <Check className="w-4 h-4 text-[#404c34]" />
             <span>توجه به نیاز هر مراجعه‌کننده</span>
           </div>
           <span className="hidden md:block w-px h-5 bg-[#E8E2D5]" />
 
           <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#A09B7C]" />
+            <Check className="w-4 h-4 text-[#404c34]" />
             <span>تصمیم‌گیری بر اساس معاینه بالینی</span>
           </div>
           <span className="hidden md:block w-px h-5 bg-[#E8E2D5]" />
 
           <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#A09B7C]" />
+            <Check className="w-4 h-4 text-[#404c34]" />
             <span>مراقبت و پیگیری آگاهانه</span>
           </div>
         </div>

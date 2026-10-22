@@ -59,7 +59,7 @@ export function HomePortfolio() {
       
       {/* Botanical Motif in background */}
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-80 h-80 pointer-events-none opacity-20 hidden lg:block">
-        <svg viewBox="0 0 200 200" fill="none" className="w-full h-full text-[#A09B7C]">
+        <svg viewBox="0 0 200 200" fill="none" className="w-full h-full text-[#404c34]">
           <path d="M50 150C60 90 120 50 170 30C140 90 100 130 50 150Z" fill="currentColor" opacity="0.4" />
           <path d="M30 120C50 70 100 40 150 20C120 80 80 110 30 120Z" fill="currentColor" opacity="0.3" />
         </svg>
@@ -85,7 +85,7 @@ export function HomePortfolio() {
             <div className="pt-2">
               <Link
                 href="/portfolio"
-                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold !text-white bg-[#625D45] hover:bg-[#7F795D] transition-all duration-200 shadow-sm"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold !text-white bg-[#625D45] hover:bg-[#343F2B] transition-all duration-200 shadow-sm"
                 style={{ color: "#ffffff" }}
               >
                 <span className="!text-white font-semibold text-white" style={{ color: "#ffffff" }}>مشاهده همه نمونه کارها</span>
@@ -133,7 +133,7 @@ export function HomePortfolio() {
                 onTouchMove={handleSliderMove}
               >
                 {/* After Image (Background layer) with dental illustration fallback */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#A09B7C]/30 via-[#FCFAF6] to-[#D8AE98]/30 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#404c34]/30 via-[#FCFAF6] to-[#D8AE98]/30 flex items-center justify-center">
                   <div className="text-center p-4">
                     <span className="text-xs font-semibold text-[#625D45]">لبخند درخشان و یکدست (نتیجه نهایی)</span>
                   </div>

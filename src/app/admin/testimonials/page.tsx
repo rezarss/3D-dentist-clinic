@@ -150,7 +150,7 @@ export default function AdminTestimonialsPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <span>مدیریت رضایت مراجعین</span>
-            <span className="text-xs bg-[#A09B7C]/20 text-[#625D45] px-2.5 py-1 rounded-full font-semibold">
+            <span className="text-xs bg-[#404c34]/20 text-[#625D45] px-2.5 py-1 rounded-full font-semibold">
               {items.length} مورد
             </span>
           </h1>
@@ -164,7 +164,7 @@ export default function AdminTestimonialsPage() {
             resetForm();
             setShowForm(!showForm);
           }}
-          className="px-4 py-2 bg-[#A09B7C] text-white rounded-xl text-sm font-semibold hover:bg-[#8e896b] transition shadow-xs flex items-center gap-2"
+          className="px-4 py-2 bg-[#404c34] text-white rounded-xl text-sm font-semibold hover:bg-[#8e896b] transition shadow-xs flex items-center gap-2"
         >
           {showForm && !editingId ? "بستن فرم" : "+ ثبت رضایت جدید"}
         </button>
@@ -205,7 +205,7 @@ export default function AdminTestimonialsPage() {
                 value={patientNameFa}
                 onChange={(e) => setPatientNameFa(e.target.value)}
                 placeholder="مثلاً سارا معتمدی"
-                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#A09B7C]"
+                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#404c34]"
                 required
               />
             </div>
@@ -219,7 +219,7 @@ export default function AdminTestimonialsPage() {
                 value={treatmentFa}
                 onChange={(e) => setTreatmentFa(e.target.value)}
                 placeholder="مثلاً لمینت سرامیکی و اصلاح لبخند"
-                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#A09B7C]"
+                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#404c34]"
               />
             </div>
           </div>
@@ -233,7 +233,7 @@ export default function AdminTestimonialsPage() {
               onChange={(e) => setCommentFa(e.target.value)}
               rows={3}
               placeholder="شرح تجربه مراجع از فضای کلینیک و روند درمان..."
-              className="w-full text-sm border border-gray-200 rounded-xl p-3 outline-none focus:border-[#A09B7C]"
+              className="w-full text-sm border border-gray-200 rounded-xl p-3 outline-none focus:border-[#404c34]"
             />
           </div>
 
@@ -247,7 +247,7 @@ export default function AdminTestimonialsPage() {
                 value={videoUrl}
                 onChange={(e) => setVideoUrl(e.target.value)}
                 placeholder="https://.../video.mp4"
-                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#A09B7C] dir-ltr text-left"
+                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#404c34] dir-ltr text-left"
               />
               <span className="text-[11px] text-gray-400 mt-1 block">
                 در صورت وارد کردن ویدئو، در صفحه اصلی اولویت نمایش با ویدئو و آیکون پخش خواهد بود.
@@ -263,7 +263,7 @@ export default function AdminTestimonialsPage() {
                 value={coverImageUrl}
                 onChange={(e) => setCoverImageUrl(e.target.value)}
                 placeholder="https://.../photo.jpg"
-                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#A09B7C] dir-ltr text-left"
+                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#404c34] dir-ltr text-left"
               />
               <span className="text-[11px] text-gray-400 mt-1 block">
                 اگر ویدیو نداشته باشد، تصویر کاور نمایش داده می‌شود؛ و اگر ویدیو داشته باشد به عنوان پوستر ویدئو استفاده خواهد شد.
@@ -277,7 +277,7 @@ export default function AdminTestimonialsPage() {
               <select
                 value={rating}
                 onChange={(e) => setRating(Number(e.target.value))}
-                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#A09B7C]"
+                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#404c34]"
               >
                 <option value={5}>۵ ستاره (عالی)</option>
                 <option value={4}>۴ ستاره</option>
@@ -292,7 +292,7 @@ export default function AdminTestimonialsPage() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as any)}
-                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#A09B7C]"
+                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#404c34]"
               >
                 <option value="published">منتشر شده (نمایش در سایت)</option>
                 <option value="draft">پیش‌نویس (مخفی)</option>
@@ -306,7 +306,7 @@ export default function AdminTestimonialsPage() {
                 type="number"
                 value={sortOrder}
                 onChange={(e) => setSortOrder(Number(e.target.value))}
-                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#A09B7C]"
+                className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-[#404c34]"
               />
             </div>
           </div>
@@ -317,7 +317,7 @@ export default function AdminTestimonialsPage() {
               id="featured-check"
               checked={featured}
               onChange={(e) => setFeatured(e.target.checked)}
-              className="rounded text-[#A09B7C] focus:ring-[#A09B7C]"
+              className="rounded text-[#404c34] focus:ring-[#404c34]"
             />
             <label htmlFor="featured-check" className="text-xs font-medium text-gray-700 cursor-pointer">
               نمایش در بخش ویژه / کارت‌های کاروسل ویدئویی
@@ -335,7 +335,7 @@ export default function AdminTestimonialsPage() {
             <button
               type="submit"
               disabled={saving}
-              className="px-6 py-2 bg-[#A09B7C] text-white rounded-xl text-xs font-semibold hover:bg-[#8e896b] transition disabled:opacity-50"
+              className="px-6 py-2 bg-[#404c34] text-white rounded-xl text-xs font-semibold hover:bg-[#8e896b] transition disabled:opacity-50"
             >
               {saving ? "در حال ذخیره..." : editingId ? "ذخیره تغییرات" : "ثبت رضایت"}
             </button>

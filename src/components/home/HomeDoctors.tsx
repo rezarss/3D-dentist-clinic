@@ -86,7 +86,7 @@ export function HomeDoctors({ doctors = [] }: HomeDoctorsProps) {
             <div className="pt-2">
               <Link
                 href="/doctors"
-                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold !text-white bg-[#625D45] hover:bg-[#7F795D] transition-all duration-200 shadow-sm"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs font-semibold !text-white bg-[#625D45] hover:bg-[#343F2B] transition-all duration-200 shadow-sm"
                 style={{ color: "#ffffff" }}
               >
                 <span className="!text-white font-semibold text-white" style={{ color: "#ffffff" }}>معرفی دکترها</span>
@@ -106,12 +106,12 @@ export function HomeDoctors({ doctors = [] }: HomeDoctorsProps) {
                 >
                   <Link
                     href={`/doctors/${doc.slug}`}
-                    className="group flex flex-col rounded-2xl bg-[#FCFAF6] border border-[#E8E2D5]/70 overflow-hidden hover:shadow-[0_16px_32px_rgba(160,155,124,0.18)] transition-all duration-300 text-center select-none"
+                    className="group flex flex-col rounded-2xl bg-[#FCFAF6] border border-[#E8E2D5]/70 overflow-hidden hover:shadow-[0_16px_32px_rgba(64,76,52,0.18)] transition-all duration-300 text-center select-none"
                   >
                     {/* Doctor Portrait with clinical background & permanent SVG fallback */}
                     <div className="relative aspect-4/5 w-full bg-[#E8E2D5]/40 overflow-hidden">
                       {/* Stylized Doctor Silhouette Fallback */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#C2BFA9]/30 to-[#A09B7C]/20 text-[#625D45]">
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[#C2BFA9]/30 to-[#404c34]/20 text-[#625D45]">
                         <svg viewBox="0 0 100 120" fill="currentColor" className="w-24 h-28 opacity-40">
                           <circle cx="50" cy="35" r="20" />
                           <path d="M15 105c0-20 15-35 35-35s35 15 35 35v15H15v-15z" />
