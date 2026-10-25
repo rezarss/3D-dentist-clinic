@@ -27,7 +27,7 @@ export function SampleDoctors({ doctors }: SampleDoctorsProps) {
   const displayDoctors = doctors.length > 0 ? doctors.slice(0, 3) : [];
 
   return (
-    <section className="py-20 relative bg-[#F7F4EE]" id="doctors">
+    <section className="py-20 relative bg-white" id="doctors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}

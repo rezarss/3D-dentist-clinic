@@ -55,7 +55,7 @@ export function HomeTechnology() {
   ];
 
   return (
-    <section id="technology" className="py-24 sm:py-32 relative bg-[#F7F4EE] overflow-hidden text-right border-t border-[#E8E2D5]/60">
+    <section id="technology" className="py-24 sm:py-32 relative bg-white overflow-hidden text-right border-t border-[#E8E2D5]/60">
       
       {/* Subtle organic light accent */}
       <div 

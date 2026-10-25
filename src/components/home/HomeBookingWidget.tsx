@@ -252,7 +252,7 @@ export function HomeBookingWidget({ services = [] }: HomeBookingWidgetProps) {
   };
 
   return (
-    <section id="appointment" className="py-24 relative overflow-hidden bg-[#F7F4EE]">
+    <section id="appointment" className="py-24 relative overflow-hidden bg-white">
       {/* Invisible anchor target for #booking compatibility */}
       <span id="booking" className="sr-only" />
 

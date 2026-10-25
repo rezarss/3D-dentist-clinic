@@ -55,7 +55,7 @@ export function HomePortfolio() {
   };
 
   return (
-    <section id="portfolio" className="py-24 sm:py-32 relative bg-[#F7F4EE] overflow-hidden text-right">
+    <section id="portfolio" className="py-24 sm:py-32 relative bg-white overflow-hidden text-right">
       
       {/* Botanical Motif in background */}
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-80 h-80 pointer-events-none opacity-20 hidden lg:block">

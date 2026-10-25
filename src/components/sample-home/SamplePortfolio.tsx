@@ -5,8 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { 
   ArrowLeft, 
-  ChevronRight, 
-  ChevronLeft, 
   MoveHorizontal, 
   Sparkles,
   CalendarCheck2,
@@ -141,16 +139,6 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
     }
   };
 
-  const handlePrevCase = () => {
-    setActiveIndex((prev) => (prev > 0 ? prev - 1 : latestSevenCases.length - 1));
-    setSliderPosition(50);
-  };
-
-  const handleNextCase = () => {
-    setActiveIndex((prev) => (prev < latestSevenCases.length - 1 ? prev + 1 : 0));
-    setSliderPosition(50);
-  };
-
   // Keyboard navigation for accessibility
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
@@ -160,8 +148,31 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
     }
   };
 
+  const handleTextPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const bounds = e.currentTarget.getBoundingClientRect();
+    const pointerX = (e.clientX - bounds.left) / bounds.width - 0.5;
+    const pointerY = (e.clientY - bounds.top) / bounds.height - 0.5;
+
+    e.currentTarget.querySelectorAll<HTMLElement>("[data-portfolio-shape]").forEach((shape) => {
+      const depth = Number(shape.dataset.depth || 1);
+      const rotation = Number(shape.dataset.rotation || 0);
+      const translateX = (pointerX * 20 * depth).toFixed(1);
+      const translateY = (pointerY * 16 * depth).toFixed(1);
+
+      shape.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation + pointerX * 3}deg)`;
+    });
+  };
+
+  const handleTextPointerLeave = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.querySelectorAll<HTMLElement>("[data-portfolio-shape]").forEach((shape) => {
+      shape.style.transform = `rotate(${Number(shape.dataset.rotation || 0)}deg)`;
+    });
+  };
+
   return (
-    <section className="py-16 sm:py-24 relative bg-[#F7F4EE] overflow-hidden" id="cases">
+    <section className="py-16 sm:py-24 relative bg-white overflow-hidden" id="cases">
       {/* Subtle organic background decoration */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#404c34]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#D8AE98]/10 rounded-full blur-3xl pointer-events-none" />
@@ -177,36 +188,56 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
              ======================================================== */}
           
           {/* Text & Headlines Side (col-span-5) */}
-          <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center text-right">
-            
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#E8E2D5] text-xs font-bold text-[#404c34] mb-5 w-fit shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#D8AE98]" />
-              <span>مستندات بالینی مراجعین</span>
+          <div
+            className="lg:col-span-5 order-2 lg:order-1 relative isolate"
+            onPointerMove={handleTextPointerMove}
+            onPointerLeave={handleTextPointerLeave}
+          >
+            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+              <span
+                data-portfolio-shape
+                data-depth="0.8"
+                data-rotation="0"
+                className="absolute right-[8%] top-[8%] h-28 w-28 rounded-full border border-[#596646]/25 bg-[#596646]/[0.04] transition-transform duration-500 ease-out will-change-transform motion-reduce:transition-none"
+              />
+              <span
+                data-portfolio-shape
+                data-depth="1.1"
+                data-rotation="18"
+                className="absolute bottom-[10%] left-[8%] h-20 w-20 rounded-xl border border-[#a58b52]/25 bg-[#a58b52]/[0.06] transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none"
+                style={{ transform: "rotate(18deg)" }}
+              />
             </div>
+            <div className="relative z-10 flex flex-col justify-center text-right">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#E8E2D5] text-xs font-bold text-[#404c34] mb-5 w-fit shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#D8AE98]" />
+                <span>نمونه کارها کلینیک</span>
+              </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#302A21] leading-[1.25] tracking-tight mb-4">
-              ۱۰۰٪ واقعی.
-              <br />
-              <span className="text-[#404c34]">۱۰۰٪ لبخند شما.</span>
-            </h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#302A21] leading-[1.25] tracking-tight mb-4">
+                ۱۰۰٪ واقعی.
+                <br />
+                <span className="text-[#404c34]">۱۰۰٪ لبخند شما.</span>
+              </h2>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#404c34] hover:bg-[#343F2B] text-white text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-98 group"
-              >
-                <span className="text-white">مشاهده همه نمونه کارها</span>
-                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              </Link>
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/portfolio"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#404c34] hover:bg-[#343F2B] text-white text-sm font-bold shadow-md hover:shadow-lg transition-all active:scale-98 group"
+                >
+                  <span className="text-white">مشاهده همه نمونه کارها</span>
+                  <ArrowLeft className="w-4 h-4 text-white group-hover:-translate-x-1 transition-transform" />
+                </Link>
 
-              <a
-                href="#booking"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white hover:bg-[#FCFAF6] text-[#302A21] text-sm font-bold border border-[#E8E2D5] shadow-xs hover:shadow-md transition-all active:scale-98"
-              >
-                <CalendarCheck2 className="w-4 h-4 text-[#404c34]" />
-                <span>رزرو وقت مشاوره</span>
-              </a>
+                <a
+                  href="#booking"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white hover:bg-[#FCFAF6] text-[#302A21] text-sm font-bold border border-[#E8E2D5] shadow-xs hover:shadow-md transition-all active:scale-98"
+                >
+                  <CalendarCheck2 className="w-4 h-4 text-[#404c34]" />
+                  <span>رزرو وقت مشاوره</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -246,15 +277,8 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
               </div>
             )}
             
-            {/* Top Bar above/on the Card: Overlapping 7 Avatars & Section Label */}
+            {/* Top Bar above/on the Card: Overlapping 7 Avatars */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 px-1">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse" />
-                <span className="text-xs sm:text-sm font-bold text-[#302A21]">
-                  مقایسه آنلاین دندان و خط لبخند
-                </span>
-              </div>
-
               {/* Overlapping Circular Avatars (Up to 7 cases) */}
               <div className="flex items-center gap-2 self-end sm:self-auto">
                 {/* Stack of Overlapping Circles */}
@@ -388,35 +412,6 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
                 >
                   <MoveHorizontal className="w-5 h-5 text-[#404c34]" />
                 </div>
-              </div>
-
-              {/* Prev / Next Case Navigation Arrow Buttons (Floating on sides of the card) */}
-              <div className="absolute inset-y-0 left-3 sm:left-4 flex items-center z-20 pointer-events-none">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePrevCase();
-                  }}
-                  aria-label="پرونده قبلی"
-                  className="pointer-events-auto w-10 h-10 rounded-full bg-white/80 hover:bg-white text-[#302A21] shadow-lg backdrop-blur-md flex items-center justify-center transition-all hover:scale-110 active:scale-95 border border-white/60 cursor-pointer"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-
-              <div className="absolute inset-y-0 right-3 sm:right-4 flex items-center z-20 pointer-events-none">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleNextCase();
-                  }}
-                  aria-label="پرونده بعدی"
-                  className="pointer-events-auto w-10 h-10 rounded-full bg-white/80 hover:bg-white text-[#302A21] shadow-lg backdrop-blur-md flex items-center justify-center transition-all hover:scale-110 active:scale-95 border border-white/60 cursor-pointer"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
               </div>
 
               {/* Bottom Overlay Info Banner on Card */}

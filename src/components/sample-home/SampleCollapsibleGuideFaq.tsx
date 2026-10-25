@@ -75,7 +75,7 @@ export function SampleCollapsibleGuideFaq() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <section className="py-16 relative bg-[#F7F4EE] border-t border-[#E8E2D5]" id="care-guide">
+    <section className="py-16 relative bg-white border-t border-[#E8E2D5]" id="care-guide">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* The Collapsible Preview Container */}

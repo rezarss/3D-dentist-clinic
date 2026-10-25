@@ -37,7 +37,7 @@ export function SampleBlog({ posts }: SampleBlogProps) {
   } | null>(null);
 
   return (
-    <section className="py-20 relative bg-[#F7F4EE]" id="journal">
+    <section className="py-20 relative bg-white" id="journal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}

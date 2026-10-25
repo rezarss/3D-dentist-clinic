@@ -65,7 +65,7 @@ export function HomeDoctors({ doctors = [] }: HomeDoctorsProps) {
   };
 
   return (
-    <section id="doctors" className="py-24 sm:py-32 relative bg-[#F7F4EE] overflow-hidden text-right">
+    <section id="doctors" className="py-24 sm:py-32 relative bg-white overflow-hidden text-right">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           

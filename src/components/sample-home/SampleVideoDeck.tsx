@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft, Play, User } from "lucide-react";
 import { VideoModal } from "./VideoModal";
@@ -27,15 +27,18 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
   const items = testimonials.length > 0 ? testimonials : [];
   const [active, setActive] = useState(0);
   const [modalVideo, setModalVideo] = useState<{ url: string; title: string } | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const pointerStartRef = useRef<{ pointerId: number; x: number; y: number } | null>(null);
+  const draggedRef = useRef(false);
 
   // Auto-slide every 6.5s if modal is closed
   useEffect(() => {
-    if (items.length <= 1 || modalVideo) return;
+    if (items.length <= 1 || modalVideo || isDragging) return;
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % items.length);
     }, 6500);
     return () => clearInterval(timer);
-  }, [items.length, modalVideo]);
+  }, [items.length, modalVideo, isDragging]);
 
   const handleNext = () => {
     setActive((prev) => (prev + 1) % items.length);
@@ -53,6 +56,8 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
   };
 
   const handleCardClick = (index: number, item: FormattedTestimonial) => {
+    if (draggedRef.current) return;
+
     if (index !== active) {
       setActive(index);
       return;
@@ -67,10 +72,52 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
     }
   };
 
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!event.isPrimary || event.button !== 0) return;
+
+    draggedRef.current = false;
+    pointerStartRef.current = {
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setIsDragging(true);
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const pointerStart = pointerStartRef.current;
+    if (!pointerStart || pointerStart.pointerId !== event.pointerId) return;
+
+    const deltaX = event.clientX - pointerStart.x;
+    const deltaY = event.clientY - pointerStart.y;
+    pointerStartRef.current = null;
+    setIsDragging(false);
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+    draggedRef.current = true;
+    setActive((current) =>
+      deltaX < 0
+        ? (current + 1) % items.length
+        : (current - 1 + items.length) % items.length,
+    );
+  };
+
+  const handlePointerCancel = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (pointerStartRef.current?.pointerId !== event.pointerId) return;
+    pointerStartRef.current = null;
+    setIsDragging(false);
+  };
+
   if (items.length === 0) return null;
 
   return (
-    <section className="py-20 relative bg-[#F7F4EE] overflow-hidden" id="stories">
+    <section className="py-20 relative bg-white overflow-hidden" id="stories">
       
       {/* Background orbs */}
       <div 
@@ -136,7 +183,7 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
         </div>
 
         {/* 3D Video Deck Container */}
-        <div className="sample-video-deck">
+        <div className={`sample-video-deck ${isDragging ? "is-dragging" : ""}`}>
           {items.map((item, index) => {
             const rel = getRelativePosition(index);
             let stateClass = "";
@@ -153,6 +200,9 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
               <div
                 key={item._id}
                 onClick={() => handleCardClick(index, item)}
+                onPointerDown={handlePointerDown}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerCancel}
                 className={`sample-deck-card ${stateClass}`}
                 role="button"
                 tabIndex={rel === 0 ? 0 : -1}
@@ -216,10 +266,11 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
               key={i}
               type="button"
               onClick={() => setActive(i)}
+              aria-pressed={i === active}
               aria-label={`نمایش ویدئوی ${toPersian(i + 1)}`}
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 i === active
-                  ? "w-8 bg-[#404c34]"
+                  ? "w-8 bg-[#404c34] shadow-[0_0_0_3px_rgba(64,76,52,0.16)]"
                   : "w-2.5 bg-[#d1cfbc]/60 hover:bg-[#404c34]/50"
               }`}
             />

@@ -84,7 +84,7 @@ export default async function Home2Page() {
   })) || [];
 
   return (
-    <main className="min-h-screen bg-[#F7F4EE] text-[#302A21] selection:bg-[#404c34]/20 selection:text-[#625D45] relative">
+    <main className="min-h-screen bg-white text-[#302A21] selection:bg-[#404c34]/20 selection:text-[#625D45] relative">
       {/* ناوبری ظریف ستونی نقاط اسکرول */}
       <ScrollProgressWaypoints />
 

@@ -9,8 +9,9 @@ import {
 import { connectDB } from "@/lib/db";
 import { SampleHero } from "@/components/sample-home/SampleHero";
 import { SampleServices } from "@/components/sample-home/SampleServices";
-import { SampleAbout } from "@/components/sample-home/SampleAbout";
+import { SampleAboutRefined } from "@/components/sample-home/SampleAboutRefined";
 import { SamplePortfolio } from "@/components/sample-home/SamplePortfolio";
+import { SamplePromoBannerOptions } from "@/components/sample-home/SamplePromoBannerOptions";
 import { SampleVideoDeck } from "@/components/sample-home/SampleVideoDeck";
 import { SampleReviewsMarquee } from "@/components/sample-home/SampleReviewsMarquee";
 import { SampleDoctors } from "@/components/sample-home/SampleDoctors";
@@ -170,21 +171,24 @@ export default async function HomePage() {
   }));
 
   return (
-    <main className="min-h-screen bg-[#F7F4EE] text-[#302A21] selection:bg-[#404c34]/20 selection:text-[#625D45] relative">
+    <main className="home-page min-h-screen text-[#302A21] selection:bg-[#404c34]/20 selection:text-[#625D45] relative">
       {/* ۱. هیرو (Hero) */}
       <SampleHero />
 
-      {/* ۲. خدمات (Services) */}
-      <SampleServices services={formattedServices} />
+      <div className="service-about-group">
+        {/* ۲. خدمات (Services) */}
+        <SampleServices services={formattedServices} />
 
-      {/* ۳. درباره ما (خلاصه) (About Us Summary) */}
-      <SampleAbout />
+        <SampleAboutRefined />
+      </div>
 
       {/* ۴. نمونه‌کارها تب‌بندی (Portfolio with tabs) */}
       <SamplePortfolio 
         items={formattedPortfolio} 
         categories={formattedPortfolioCats} 
       />
+
+      <SamplePromoBannerOptions />
 
       {/* ۵. رضایت مشتریان ویدئویی به صورت کارت‌های ورق‌خور (Video Deck) */}
       <SampleVideoDeck testimonials={formattedTestimonials} />

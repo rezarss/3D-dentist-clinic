@@ -42,7 +42,7 @@ export function SampleReviewsMarquee({ testimonials }: SampleReviewsMarqueeProps
   if (items.length === 0) return null;
 
   return (
-    <section className="py-16 relative bg-[#F7F4EE] border-t border-[#E8E2D5]" id="reviews">
+    <section className="py-16 relative bg-white border-t border-[#E8E2D5]" id="reviews">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         
         {/* Section Heading */}

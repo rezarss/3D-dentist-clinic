@@ -5,15 +5,15 @@
   --primary-dark: #293321;
   --secondary: #d1cfbc;
   --secondary-light: #ece9dd;
-  --surface-bg: #F7F4EE;
-  --surface-card: #FCFAF6;
+  --surface-bg: #fff;
+  --surface-card: #fff;
   --ink: #302A21;
   --ink2: #463F32;
   --night: #24221b;
   --muted: #756F62;
   --teal: #404c34;
   --mint: #d1cfbc;
-  --ivory: #FCFAF6;
+  --ivory: #fff;
   --border: rgba(64,76,52, 0.24);
   --shadow: 0 20px 50px rgba(48, 42, 33, 0.08);
   --glow: rgba(209, 207, 188, 0.45);
@@ -37,14 +37,14 @@
   height: 580px;
   right: -170px;
   top: -100px;
-  background: #d1cfbc;
+  background: #fff;
 }
 .sample-ambient-two {
   width: 500px;
   height: 420px;
   left: -190px;
   top: 580px;
-  background: #e4e2d3;
+  background: #fff;
 }
 
 /* Glass card styling */
@@ -107,15 +107,77 @@
   padding: 14px 18px;
   border-radius: 20px;
   z-index: 5;
-  animation: sampleFloat 6s ease-in-out infinite;
   background: linear-gradient(125deg, rgba(255, 255, 255, 0.92), rgba(247, 244, 238, 0.85));
   border: 1px solid rgba(255, 255, 255, 0.95);
   box-shadow: 0 20px 48px rgba(48, 42, 33, 0.1);
   backdrop-filter: blur(20px);
 }
+.hero-enter {
+  opacity: 0;
+  animation: hero-enter-up 1250ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+.hero-enter-left {
+  opacity: 0;
+  animation: hero-enter-left 1450ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+.hero-float-enter {
+  opacity: 0;
+  animation: hero-enter-up 1350ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+.sample-float-glass-motion {
+  animation: sampleFloat 6s ease-in-out 1.8s infinite;
+}
+@keyframes hero-enter-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-enter-left {
+  from { opacity: 0; transform: translateX(-28px) scale(0.97); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
 @keyframes sampleFloat {
   50% {
     transform: translateY(-12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .hero-enter-left,
+  .hero-float-enter {
+    opacity: 1;
+    animation: none;
+  }
+  .sample-float-glass-motion {
+    animation: none;
+  }
+}
+.promo-reveal-background,
+.promo-reveal-doctor,
+.promo-reveal-item {
+  transition: opacity 1100ms ease, transform 1100ms cubic-bezier(0.2, 0.75, 0.2, 1), filter 1100ms ease;
+}
+.is-reveal-ready .promo-reveal-background:not(.is-visible) {
+  opacity: 0;
+  transform: scale(1.035);
+}
+.is-reveal-ready .promo-reveal-doctor:not(.is-visible) {
+  opacity: 0;
+  transform: translateX(-42px);
+  filter: blur(4px);
+}
+.is-reveal-ready .promo-reveal-item:not(.is-visible) {
+  opacity: 0;
+  transform: translateX(22px);
+  filter: blur(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .promo-reveal-background,
+  .promo-reveal-doctor,
+  .promo-reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
   }
 }
 
@@ -145,17 +207,61 @@
   position: relative;
   overflow: hidden;
   border-radius: 26px;
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  border: 2px solid #ece9dd !important;
   background: linear-gradient(135deg, #d1cfbc, #404c34);
-  box-shadow: 0 12px 32px rgba(48, 42, 33, 0.06);
-  transition: transform 0.4s cubic-bezier(0.2, 0.75, 0.2, 1), box-shadow 0.4s;
+  box-shadow: 0 12px 32px rgba(64, 76, 52, 0.22) !important;
+  transition: transform 0.4s cubic-bezier(0.2, 0.75, 0.2, 1), box-shadow 0.4s, border-color 0.4s;
 }
 .sample-service-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 22px 50px rgba(48, 42, 33, 0.12);
+  border-color: #d1cfbc !important;
+  box-shadow: 0 22px 50px rgba(64, 76, 52, 0.3) !important;
+}
+.scroll-reveal-card {
+  transition: opacity 850ms ease, transform 850ms cubic-bezier(0.2, 0.75, 0.2, 1), filter 850ms ease;
+}
+.is-reveal-ready .scroll-reveal-card:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  filter: blur(5px);
+}
+.scroll-reveal-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+.scroll-reveal-card-2 { transition-delay: 100ms; }
+.scroll-reveal-card-3 { transition-delay: 200ms; }
+.scroll-reveal-card-4 { transition-delay: 300ms; }
+.scroll-reveal-card-5 { transition-delay: 400ms; }
+.scroll-reveal-card-6 { transition-delay: 500ms; }
+.sample-service-card.scroll-reveal-card {
+  transition-property: opacity, transform, filter, box-shadow, border-color;
+  transition-duration: 850ms, 850ms, 850ms, 400ms, 400ms;
+  transition-timing-function: ease, cubic-bezier(0.2, 0.75, 0.2, 1), ease, ease, ease;
+}
+.sample-service-card.scroll-reveal-card.is-visible:hover {
+  transform: translateY(-6px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-reveal-ready .scroll-reveal-card:not(.is-visible),
+  .scroll-reveal-card,
+  .scroll-reveal-card.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none !important;
+  }
 }
 .sample-service-card-large {
   grid-row: span 2;
+}
+.service-caption-glass {
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(41, 51, 33, 0.32));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.42), 0 12px 30px rgba(20, 26, 17, 0.16);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
 }
 
 /* 3D Video Testimonial Deck */
@@ -166,6 +272,7 @@
   perspective: 1200px;
   transform-style: preserve-3d;
   margin: 25px 0 10px;
+  touch-action: pan-y;
 }
 .sample-deck-card {
   --dx: 0px;
@@ -192,7 +299,9 @@
   pointer-events: none;
   cursor: pointer;
   will-change: transform;
+  user-select: none;
 }
+.sample-video-deck.is-dragging .sample-deck-card { cursor: grabbing; }
 .sample-deck-card.is-active {
   --dx: 0px;
   --rot: 0deg;
@@ -337,7 +446,7 @@
   left: 0;
   right: 0;
   height: 220px;
-  background: linear-gradient(0deg, #F7F4EE 18%, rgba(247, 244, 238, 0.92) 40%, rgba(247, 244, 238, 0.56) 68%, transparent 100%);
+  background: linear-gradient(0deg, #fff 18%, rgba(255, 255, 255, 0.92) 40%, rgba(255, 255, 255, 0.56) 68%, transparent 100%);
   display: flex;
   align-items: flex-end;
   justify-content: center;

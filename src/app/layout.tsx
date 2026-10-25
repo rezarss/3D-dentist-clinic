@@ -9,7 +9,8 @@ const vazirmatn = localFont({
   src: "./fonts/vazirmatn/Vazirmatn[wght].woff2",
   variable: "--font-vazirmatn",
   weight: "100 900",
-  display: "swap",
+  display: "block",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvide
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fa" dir="rtl" className={vazirmatn.variable} suppressHydrationWarning>
-      <body className={`${vazirmatn.className} antialiased bg-[#F7F4EE] text-[#302A21]`}>
+      <body className={`${vazirmatn.className} antialiased bg-white text-[#302A21]`}>
         <ThemeProvider>
           <SmoothScrollProvider>
             <SiteHeader />

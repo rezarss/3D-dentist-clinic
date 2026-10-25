@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export type FormattedService = {
   _id: string;
@@ -42,13 +43,38 @@ const toPersian = (n: number) => String(n).padStart(2, "0").replace(/\d/g, (d) =
 export function SampleServices({ services, onSelectService }: SampleServicesProps) {
   // Use DB services if available (limit to 6 for the 3x2 layout matching sample)
   const displayServices = services && services.length > 0 ? services.slice(0, 6) : [];
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    const cards = grid?.querySelectorAll<HTMLElement>(".scroll-reveal-card");
+    if (!grid || !cards?.length) return;
+
+    grid.classList.add("is-reveal-ready");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -30px 0px" },
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => {
+      observer.disconnect();
+      grid.classList.remove("is-reveal-ready");
+    };
+  }, [displayServices.length]);
 
   return (
-    <section className="py-20 relative bg-[#F7F4EE]" id="services">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="sample-services-section py-20 relative bg-white" id="services">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 md:gap-16 mb-12">
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 md:gap-16 mb-12">
           <div>
             <div className="sample-kicker">
               <span className="sample-kicker-line" />
@@ -76,7 +102,7 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
         </div>
 
         {/* Services Grid (Matching sample 3-column with first card tall) */}
-        <div className="sample-services-grid">
+        <div className="sample-services-grid scroll-reveal-grid" ref={gridRef}>
           {displayServices.map((service, index) => {
             const isLarge = index === 0;
             const imgSrc = service.image || SERVICE_IMAGES[index % SERVICE_IMAGES.length];
@@ -95,7 +121,7 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
                     onSelectService(service.title.fa, service._id);
                   }
                 }}
-                className={`sample-service-card group ${isLarge ? "sample-service-card-large" : ""}`}
+                className={`sample-service-card scroll-reveal-card scroll-reveal-card-${index + 1} group ${isLarge ? "sample-service-card-large" : ""}`}
                 aria-label={`درخواست مشاوره درباره ${service.title.fa}`}
               >
                 <Image
@@ -117,7 +143,7 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
                   </span>
 
                   {/* Caption glass card */}
-                  <div className="relative p-4 pr-5 rounded-2xl bg-[#293321]/75 backdrop-blur-md border border-[#d1cfbc]/35 shadow-lg flex items-center justify-between gap-4 mt-auto">
+                  <div className="service-caption-glass relative p-4 pr-5 rounded-2xl flex items-center justify-between gap-4 mt-auto">
                     <div className="text-right">
                       <h3 className="text-lg sm:text-xl font-black text-white mb-1">
                         {service.title.fa}

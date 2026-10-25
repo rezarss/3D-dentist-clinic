@@ -18,7 +18,7 @@ export function SiteFooter() {
   }
 
   return (
-    <footer className="relative bg-[#FCFAF6] border-t border-[#E8E2D5] text-[#302A21] pt-16 pb-10 overflow-hidden text-right">
+    <footer className="relative bg-white border-t border-[#E8E2D5] text-[#302A21] pt-16 pb-10 overflow-hidden text-right">
       
       {/* Organic Curved Wave Transition at Top */}
       <div className="absolute top-0 left-0 right-0 h-6 -translate-y-full overflow-hidden pointer-events-none">

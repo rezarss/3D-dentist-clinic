@@ -192,7 +192,7 @@ export function SampleBookingWizard({ services = [], preselectedServiceId }: Sam
   };
 
   return (
-    <section id="appointment" className="py-24 relative overflow-hidden bg-[#F7F4EE]">
+    <section id="appointment" className="py-24 relative overflow-hidden bg-white">
       {/* Ambient Seamless Lighting Orbs */}
       <div 
         className="absolute top-1/3 left-10 w-96 h-96 rounded-full blur-[140px] opacity-25 pointer-events-none"

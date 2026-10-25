@@ -113,7 +113,7 @@ export function HomeServices({ services = [] }: HomeServicesProps) {
   ];
 
   return (
-    <section id="services" className="py-24 sm:py-32 relative bg-[#F7F4EE] overflow-hidden text-right">
+    <section id="services" className="py-24 sm:py-32 relative bg-white overflow-hidden text-right">
       
       {/* Decorative Botanical & Sculpture Motif on far left edge */}
       <div className="absolute top-1/2 -left-12 -translate-y-1/2 w-72 h-96 pointer-events-none opacity-20 hidden xl:block">
