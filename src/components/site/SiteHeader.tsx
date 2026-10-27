@@ -77,10 +77,11 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* 1. Page Scroll Progress Indicator (exact match with sample/index.html) */}
-      <div aria-hidden="true" className="page-progress">
-        <span style={{ width: `${scrollPercent}%` }} />
-      </div>
+      {pathname !== "/" && (
+        <div aria-hidden="true" className="page-progress">
+          <span style={{ width: `${scrollPercent}%` }} />
+        </div>
+      )}
 
       {/* 2. Floating Liquid-Glass Navigation Island (exact match with sample/index.html) */}
       <header

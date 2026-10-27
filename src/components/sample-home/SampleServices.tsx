@@ -20,29 +20,10 @@ type SampleServicesProps = {
   onSelectService?: (serviceTitle: string, serviceId: string) => void;
 };
 
-const SERVICE_IMAGES = [
-  "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=800&q=80",
-];
-
-const CATEGORY_TAGS = [
-  "RESTORATIVE",
-  "AESTHETIC",
-  "PREVENTIVE",
-  "ALIGNMENT",
-  "PROSTHETIC",
-  "ENDODONTIC",
-];
-
 const toPersian = (n: number) => String(n).padStart(2, "0").replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
 
 export function SampleServices({ services, onSelectService }: SampleServicesProps) {
-  // Use DB services if available (limit to 6 for the 3x2 layout matching sample)
-  const displayServices = services && services.length > 0 ? services.slice(0, 6) : [];
+  const displayServices = services;
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -105,9 +86,7 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
         <div className="sample-services-grid scroll-reveal-grid" ref={gridRef}>
           {displayServices.map((service, index) => {
             const isLarge = index === 0;
-            const imgSrc = service.image || SERVICE_IMAGES[index % SERVICE_IMAGES.length];
-            const tag = CATEGORY_TAGS[index % CATEGORY_TAGS.length];
-            const indexStr = `${toPersian(index + 1)} / ${tag}`;
+            const indexStr = `${toPersian(index + 1)} / CLINIC CARE`;
             const badgeTheme = index % 2 === 0
               ? "bg-[#404c34] text-white border-[#d1cfbc]/60"
               : "bg-[#d1cfbc] text-[#293321] border-[#ece9dd]";
@@ -124,13 +103,17 @@ export function SampleServices({ services, onSelectService }: SampleServicesProp
                 className={`sample-service-card scroll-reveal-card scroll-reveal-card-${index + 1} group ${isLarge ? "sample-service-card-large" : ""}`}
                 aria-label={`درخواست مشاوره درباره ${service.title.fa}`}
               >
-                <Image
-                  src={imgSrc}
-                  alt={service.title.fa}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105 group-hover:filter group-hover:saturate-110"
-                  referrerPolicy="no-referrer"
-                />
+                {service.image ? (
+                  <Image
+                    src={service.image}
+                    alt={service.title.fa}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 group-hover:filter group-hover:saturate-110"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <span className="sample-service-card-placeholder" aria-hidden="true" />
+                )}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#293321]/90 via-[#404c34]/25 to-transparent flex flex-col justify-between p-6 z-10 text-white">
                   

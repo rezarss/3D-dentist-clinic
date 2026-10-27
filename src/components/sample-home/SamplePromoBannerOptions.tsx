@@ -128,7 +128,6 @@ export function SamplePromoBannerOptions() {
     <div className="py-8 sm:py-12">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-6 lg:px-8">
         <PromoBanner option="گزینه ۱ | پس‌زمینه سبز" variant="green" />
-        <PromoBanner option="گزینه ۲ | پس‌زمینه کرم" variant="cream" />
       </div>
     </div>
   );

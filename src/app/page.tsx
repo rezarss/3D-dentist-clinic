@@ -3,7 +3,6 @@ import {
   DoctorModel, 
   BlogPostModel, 
   PortfolioItemModel, 
-  PortfolioCategoryModel, 
   TestimonialModel 
 } from "@/models";
 import { connectDB } from "@/lib/db";
@@ -26,8 +25,8 @@ export default async function HomePage() {
   let doctors: any[] = [];
   let posts: any[] = [];
   let portfolioItems: any[] = [];
-  let portfolioCategories: any[] = [];
   let testimonials: any[] = [];
+  let reviewTestimonials: any[] = [];
 
   try {
     await connectDB();
@@ -36,23 +35,23 @@ export default async function HomePage() {
       rawDoctors,
       rawPosts,
       rawPortfolioItems,
-      rawPortfolioCategories,
       rawTestimonials,
+      rawReviewTestimonials,
     ] = await Promise.all([
-      ServiceModel.find({ status: "published" }).sort({ createdAt: 1 }).limit(12).lean().catch(() => []),
+      ServiceModel.find({ status: "published" }).populate("coverMediaId", "url").sort({ createdAt: 1 }).lean().catch(() => []),
       DoctorModel.find({ status: "published" }).sort({ createdAt: 1 }).limit(6).lean().catch(() => []),
       BlogPostModel.find({ status: "published" }).sort({ publishedAt: -1, createdAt: -1 }).limit(6).lean().catch(() => []),
-      PortfolioItemModel.find({ status: "published" }).populate("categoryIds").sort({ createdAt: -1 }).limit(10).lean().catch(() => []),
-      PortfolioCategoryModel.find().sort({ createdAt: 1 }).limit(10).lean().catch(() => []),
+      PortfolioItemModel.find({ status: "published" }).sort({ createdAt: -1 }).limit(10).lean().catch(() => []),
       TestimonialModel.find({ status: "published" }).sort({ sortOrder: 1, createdAt: -1 }).limit(20).lean().catch(() => []),
+      TestimonialModel.find({ status: "published", showInReviews: true }).sort({ sortOrder: 1, createdAt: -1 }).limit(20).lean().catch(() => []),
     ]);
 
     services = rawServices;
     doctors = rawDoctors.length > 0 ? rawDoctors : await DoctorModel.find().limit(6).lean().catch(() => []);
     posts = rawPosts;
     portfolioItems = rawPortfolioItems;
-    portfolioCategories = rawPortfolioCategories;
     testimonials = rawTestimonials;
+    reviewTestimonials = rawReviewTestimonials;
   } catch (err) {
     console.error("Database loading error in HomePage:", err);
   }
@@ -72,7 +71,7 @@ export default async function HomePage() {
     category: s.category || "cosmetic",
     duration: s.duration || "۱ جلسه",
     warranty: s.warranty || "گارانتی اصالت",
-    image: s.image || undefined,
+    image: s.coverMediaId && typeof s.coverMediaId === "object" ? s.coverMediaId.url || undefined : undefined,
   }));
 
   // Format doctors from database
@@ -112,19 +111,8 @@ export default async function HomePage() {
     image: p.coverUrl || undefined,
   }));
 
-  // Format portfolio categories from database
-  const formattedPortfolioCats = portfolioCategories.map((c: any) => ({
-    slug: c.slug,
-    name: {
-      fa: c.name?.fa || c.slug,
-      en: c.name?.en || "",
-    },
-  }));
-
   // Format portfolio items from database
-  const formattedPortfolio = portfolioItems.map((p: any) => {
-    const firstCat = Array.isArray(p.categoryIds) && p.categoryIds[0] ? p.categoryIds[0] : null;
-    return {
+  const formattedPortfolio = portfolioItems.map((p: any) => ({
       _id: String(p._id),
       slug: p.slug,
       title: {
@@ -139,18 +127,15 @@ export default async function HomePage() {
         fa: p.treatment?.fa || "",
         en: p.treatment?.en || "",
       },
-      categorySlug: firstCat?.slug || "smile",
-      categoryName: firstCat?.name?.fa || "زیبایی لبخند",
       images: Array.isArray(p.images) && p.images.length > 0 ? p.images : [],
       beforeImage: p.beforeImage || (Array.isArray(p.images) && p.images[1]) || "",
       afterImage: p.afterImage || (Array.isArray(p.images) && p.images[0]) || "",
       featureTitle: p.featureTitle || p.title?.fa || "",
       featureSubtitle: p.featureSubtitle || p.description?.fa || "",
-    };
-  });
+    }));
 
   // Format testimonials from database
-  const formattedTestimonials = testimonials.map((t: any) => ({
+  const formatTestimonial = (t: any) => ({
     _id: String(t._id),
     patientName: {
       fa: typeof t.patientName === "string" ? t.patientName : t.patientName?.fa || "مراجعه‌کننده",
@@ -168,7 +153,9 @@ export default async function HomePage() {
     videoUrl: t.videoUrl || "",
     coverImageUrl: t.coverImageUrl || "",
     featured: Boolean(t.featured),
-  }));
+  });
+  const formattedTestimonials = testimonials.map(formatTestimonial);
+  const formattedReviewTestimonials = reviewTestimonials.map(formatTestimonial);
 
   return (
     <main className="home-page min-h-screen text-[#302A21] selection:bg-[#404c34]/20 selection:text-[#625D45] relative">
@@ -182,10 +169,9 @@ export default async function HomePage() {
         <SampleAboutRefined />
       </div>
 
-      {/* ۴. نمونه‌کارها تب‌بندی (Portfolio with tabs) */}
+      {/* ۴. نمونه‌کارهای کلینیک */}
       <SamplePortfolio 
         items={formattedPortfolio} 
-        categories={formattedPortfolioCats} 
       />
 
       <SamplePromoBannerOptions />
@@ -194,7 +180,7 @@ export default async function HomePage() {
       <SampleVideoDeck testimonials={formattedTestimonials} />
 
       {/* ۶. رضایت مشتریان متنی متحرک (Moving text reviews marquee) */}
-      <SampleReviewsMarquee testimonials={formattedTestimonials} />
+      <SampleReviewsMarquee testimonials={formattedReviewTestimonials} />
 
       {/* ۷. معرفی پزشکان (Doctors) */}
       <SampleDoctors doctors={formattedDoctors} />

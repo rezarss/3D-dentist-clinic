@@ -63,24 +63,28 @@ export function SampleReviewsMarquee({ testimonials }: SampleReviewsMarqueeProps
             <p className="text-sm text-[#756F62] leading-relaxed">
               بازخوردهای واقعی مراجعین درباره روند درمان و مشاوره‌ها. با لمس کارت‌ها حرکت متوقف خواهد شد.
             </p>
-            <button
-              type="button"
-              onClick={() => setIsPaused(!isPaused)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#625D45] bg-white border border-[#E8E2D5] shadow-xs hover:bg-[#FCFAF6] transition"
-              aria-pressed={isPaused}
-            >
-              {isPaused ? (
-                <>
-                  <Play className="w-3.5 h-3.5 fill-[#625D45]" />
-                  <span>ادامه حرکت نظرات</span>
-                </>
-              ) : (
-                <>
-                  <Pause className="w-3.5 h-3.5 fill-[#625D45]" />
-                  <span>توقف حرکت نظرات</span>
-                </>
+            <div className="flex flex-wrap items-center gap-2">
+              {items.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => setIsPaused(!isPaused)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#625D45] bg-white border border-[#E8E2D5] shadow-xs hover:bg-[#FCFAF6] transition"
+                  aria-pressed={isPaused}
+                >
+                  {isPaused ? (
+                    <>
+                      <Play className="w-3.5 h-3.5 fill-[#625D45]" />
+                      <span>ادامه حرکت نظرات</span>
+                    </>
+                  ) : (
+                    <>
+                      <Pause className="w-3.5 h-3.5 fill-[#625D45]" />
+                      <span>توقف حرکت نظرات</span>
+                    </>
+                  )}
+                </button>
               )}
-            </button>
+            </div>
           </div>
         </div>
 
@@ -88,10 +92,10 @@ export function SampleReviewsMarquee({ testimonials }: SampleReviewsMarqueeProps
 
       {/* Marquee Track */}
       <div className="sample-reviews-marquee" ref={marqueeRef}>
-        <div className={`sample-reviews-track ${isPaused ? "is-paused" : ""} ${isReady ? "is-ready" : ""}`}>
-          {[0, 1].map((groupIndex) => (
+        <div className={`sample-reviews-track ${isPaused ? "is-paused" : ""} ${isReady && items.length > 1 ? "is-ready" : ""} ${items.length === 1 ? "is-single" : ""}`}>
+          {(items.length > 1 ? [0, 1] : [0]).map((groupIndex) => (
             <div className="sample-reviews-group" key={groupIndex} aria-hidden={groupIndex === 1}>
-              {Array.from({ length: setsPerGroup }, (_, setIndex) => (
+              {Array.from({ length: items.length > 1 ? setsPerGroup : 1 }, (_, setIndex) => (
                 <div
                   className="sample-reviews-set"
                   key={setIndex}

@@ -212,6 +212,14 @@
   box-shadow: 0 12px 32px rgba(64, 76, 52, 0.22) !important;
   transition: transform 0.4s cubic-bezier(0.2, 0.75, 0.2, 1), box-shadow 0.4s, border-color 0.4s;
 }
+.sample-service-card-placeholder {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(255, 255, 255, 0.3), transparent 30%),
+    linear-gradient(135deg, #d1cfbc, #74806a 55%, #404c34);
+}
 .sample-service-card:hover {
   transform: translateY(-6px);
   border-color: #d1cfbc !important;
@@ -387,6 +395,20 @@
 }
 .sample-reviews-track.is-ready {
   animation: sampleReviewFlow 50s linear infinite;
+}
+.sample-reviews-track.is-single {
+  width: 100%;
+  justify-content: center;
+  animation: none;
+}
+.sample-reviews-track.is-single .sample-reviews-group {
+  width: 100%;
+  justify-content: center;
+  padding-right: 0;
+}
+.sample-reviews-track.is-single .sample-reviews-set {
+  width: 100%;
+  justify-content: center;
 }
 .sample-reviews-group {
   display: flex;

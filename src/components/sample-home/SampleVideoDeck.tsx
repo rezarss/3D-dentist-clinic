@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft, Play, User } from "lucide-react";
 import { VideoModal } from "./VideoModal";
+import Link from "next/link";
 
 export type FormattedTestimonial = {
   _id: string;
@@ -148,6 +149,10 @@ export function SampleVideoDeck({ testimonials }: SampleVideoDeckProps) {
             <p className="text-sm text-[#756F62] leading-relaxed">
               تجربه مستقیم مراجعین درباره محیط کلینیک، اخلاق حرفه‌ای پزشکان و کیفیت درمان‌های انجام‌شده. روی کارت‌ها کلیک کنید تا ویدئوی هر تجربه را مشاهده فرمایید.
             </p>
+            <Link href="/testimonials" className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-[#404c34] hover:text-[#596747]">
+              مشاهده همه رضایت‌ها
+              <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </div>
 

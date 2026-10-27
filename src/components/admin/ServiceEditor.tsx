@@ -11,6 +11,10 @@ import { useAdminFeedback } from "@/components/admin/AdminFeedback";
 type Localized={fa:string;en:string};
 type ServiceForm={slug:string;title:Localized;excerpt:Localized;content:Localized;suitableFor:Localized;benefits:Localized;limitations:Localized;careInstructions:Localized;faqs:{question:Localized;answer:Localized}[];bookingFee:number;currency:string;coverMediaId:string|null;status:string;commentSettings:{enabled:boolean;allowRating:boolean};seo:{title:Localized;description:Localized;canonical:Localized;keywords:string;index:boolean;follow:boolean}};
 
+function toLocalized(value?:Partial<Localized>|null):Localized{
+  return {fa:typeof value?.fa==="string"?value.fa:"",en:typeof value?.en==="string"?value.en:""};
+}
+
 const empty:ServiceForm={
   slug:"",title:{fa:"",en:""},excerpt:{fa:"",en:""},content:{fa:"",en:""},suitableFor:{fa:"",en:""},benefits:{fa:"",en:""},limitations:{fa:"",en:""},careInstructions:{fa:"",en:""},faqs:[],bookingFee:0,currency:"IRR",coverMediaId:null,status:"draft",
   commentSettings:{enabled:false,allowRating:true},
@@ -26,6 +30,7 @@ export function ServiceEditor({id}:{id?:string}){
   const [error,setError]=useState("");
   const [pickerOpen,setPickerOpen]=useState(false);
   const [coverUrl,setCoverUrl]=useState("");
+  const [specializedOpen,setSpecializedOpen]=useState(false);
 
   async function submit(e:FormEvent){
     e.preventDefault();
@@ -61,7 +66,7 @@ export function ServiceEditor({id}:{id?:string}){
         benefits:d.benefits||{fa:"",en:""},
         limitations:d.limitations||{fa:"",en:""},
         careInstructions:d.careInstructions||{fa:"",en:""},
-        faqs:Array.isArray(d.faqs)?d.faqs.map((x:{question?:Localized;answer?:Localized})=>({question:x.question||{fa:"",en:""},answer:x.answer||{fa:"",en:""}})):[],
+        faqs:Array.isArray(d.faqs)?d.faqs.map((x:{question?:Localized;answer?:Localized})=>({question:toLocalized(x.question),answer:toLocalized(x.answer)})):[],
         bookingFee:d.bookingFee||0,
         currency:d.currency||"IRR",
         coverMediaId:d.coverMediaId?String(d.coverMediaId):null,
@@ -76,7 +81,8 @@ export function ServiceEditor({id}:{id?:string}){
           follow:d.seo?.robots?.follow!==false
         }
       });
-      setCoverUrl("");
+      setCoverUrl(d.coverMediaUrl||"");
+      setSpecializedOpen(Array.isArray(d.faqs)&&d.faqs.length>0);
     }catch(e){setError(e instanceof Error?e.message:"خطا");}
     finally{setLoading(false);}
   },[]);
@@ -114,9 +120,11 @@ export function ServiceEditor({id}:{id?:string}){
       <label>English content</label>
       <RichEditor value={form.content.en} onChange={value=>setForm({...form,content:{...form.content,en:value}})} placeholder="Write the service content…"/>
 
-      <details>
-        <summary style={{cursor:"pointer",fontWeight:700}}>محتوای تخصصی خدمت</summary>
-        <div style={{display:"grid",gap:14,paddingTop:14}}>
+      <section style={{padding:12,border:"1px solid #ddd",borderRadius:14}}>
+        <button type="button" aria-expanded={specializedOpen} onClick={()=>setSpecializedOpen(open=>!open)} style={{width:"100%",border:0,padding:0,background:"transparent",textAlign:"right",fontWeight:700}}>
+          محتوای تخصصی خدمت
+        </button>
+        {specializedOpen&&<div style={{display:"grid",gap:14,paddingTop:14}}>
           <label>برای چه کسانی مناسب است — فارسی</label>
           <RichEditor value={form.suitableFor.fa} onChange={value=>setForm({...form,suitableFor:{...form.suitableFor,fa:value}})}/>
           <label>Suitable for — English</label>
@@ -136,16 +144,19 @@ export function ServiceEditor({id}:{id?:string}){
           <div>
             <h3>سؤالات متداول</h3>
             {form.faqs.map((faq,index)=><div key={index} style={{border:"1px solid #ddd",borderRadius:10,padding:12,marginBottom:10,display:"grid",gap:10}}>
-              <div style={{display:"flex",justifyContent:"space-between",gap:10}}><strong>سؤال {index+1}</strong><button className="admin-action-danger" type="button" onClick={()=>setForm({...form,faqs:form.faqs.filter((_,i)=>i!==index)})}>حذف</button></div>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10,flexWrap:"wrap"}}>
+                <strong>سؤال {index+1}: {faq.question.fa||faq.question.en||"بدون متن"}</strong>
+                <button className="admin-action-danger" type="button" onClick={()=>setForm(current=>({...current,faqs:current.faqs.filter((_,i)=>i!==index)}))}>حذف</button>
+              </div>
               <input value={faq.question.fa} onChange={e=>setForm({...form,faqs:form.faqs.map((x,i)=>i===index?{...x,question:{...x.question,fa:e.target.value}}:x)})} placeholder="سؤال فارسی"/>
               <input value={faq.question.en} onChange={e=>setForm({...form,faqs:form.faqs.map((x,i)=>i===index?{...x,question:{...x.question,en:e.target.value}}:x)})} placeholder="Question in English" dir="ltr"/>
               <RichEditor value={faq.answer.fa} onChange={value=>setForm({...form,faqs:form.faqs.map((x,i)=>i===index?{...x,answer:{...x.answer,fa:value}}:x)})}/>
               <RichEditor value={faq.answer.en} onChange={value=>setForm({...form,faqs:form.faqs.map((x,i)=>i===index?{...x,answer:{...x.answer,en:value}}:x)})} placeholder="Answer in English"/>
             </div>)}
-            <button className="admin-action-create" type="button" onClick={()=>setForm({...form,faqs:[...form.faqs,{question:{fa:"",en:""},answer:{fa:"",en:""}}]})}>افزودن سؤال متداول</button>
+            <button className="admin-action-create" type="button" onClick={()=>{setSpecializedOpen(true);setForm(current=>({...current,faqs:[...current.faqs,{question:{fa:"",en:""},answer:{fa:"",en:""}}]}));}}>افزودن سؤال متداول</button>
           </div>
-        </div>
-      </details>
+        </div>}
+      </section>
 
 
       <details>

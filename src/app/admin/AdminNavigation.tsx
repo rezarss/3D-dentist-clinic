@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 const navigation = [
   { label: "داشبورد", href: "/admin", icon: "⌂" },
@@ -27,12 +28,30 @@ const navigation = [
 
 export function AdminNavigation() {
   const pathname = usePathname() ?? "";
+  const navRef = useRef<HTMLElement>(null);
   const activeHref = navigation
     .filter((item) => item.href === "/admin" ? pathname === item.href : pathname === item.href || pathname.startsWith(item.href + "/"))
     .sort((a, b) => b.href.length - a.href.length)[0]?.href;
 
+  useEffect(() => {
+    function containWheelScroll(event: WheelEvent) {
+      const nav = navRef.current;
+      const target = event.target;
+      if (!nav || !(target instanceof Node) || !nav.contains(target)) return;
+      if (window.matchMedia("(max-width: 720px)").matches) return;
+
+      event.preventDefault();
+      if (nav.scrollHeight > nav.clientHeight) {
+        nav.scrollTop += event.deltaY;
+      }
+    }
+
+    window.addEventListener("wheel", containWheelScroll, { capture: true, passive: false });
+    return () => window.removeEventListener("wheel", containWheelScroll, { capture: true });
+  }, []);
+
   return (
-    <nav className="admin-nav">
+    <nav ref={navRef} className="admin-nav" data-lenis-prevent-wheel>
       {navigation.map((item) => {
         const isActive = item.href === activeHref;
         return (

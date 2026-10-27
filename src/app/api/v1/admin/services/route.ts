@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/db";
-import { ServiceModel } from "@/models";
+import { MediaModel, ServiceModel } from "@/models";
 import { getAuth, can } from "@/lib/rbac";
 import { ok, fail } from "@/lib/api";
 import { serviceInput, contentQuery } from "@/lib/validators";
@@ -39,7 +39,14 @@ export async function GET(req: Request) {
       ServiceModel.find(filter).sort({ createdAt: -1 }).skip(skip).limit(query.limit).lean(),
       ServiceModel.countDocuments(filter),
     ]);
-    return ok({items,pagination:{page:query.page,limit:query.limit,total,pages:Math.ceil(total/query.limit)}});
+    const mediaIds=items.flatMap(item=>item.coverMediaId?[item.coverMediaId]:[]);
+    const media=mediaIds.length?await MediaModel.find({_id:{$in:mediaIds}}).select("url").lean():[];
+    const mediaById=new Map(media.map(item=>[String(item._id),item.url]));
+    const itemsWithCover=items.map(item=>({
+      ...item,
+      coverMediaUrl:item.coverMediaId?mediaById.get(String(item.coverMediaId))||"": "",
+    }));
+    return ok({items:itemsWithCover,pagination:{page:query.page,limit:query.limit,total,pages:Math.ceil(total/query.limit)}});
   } catch (e) {
     return fail(e instanceof Error ? e.message : "Unable to load services", 500);
   }

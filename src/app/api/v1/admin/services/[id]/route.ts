@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/db";
-import { ServiceModel } from "@/models";
+import { MediaModel, ServiceModel } from "@/models";
 import { getAuth, can } from "@/lib/rbac";
 import { ok, fail } from "@/lib/api";
 import { serviceInput } from "@/lib/validators";
@@ -20,7 +20,14 @@ function sanitizeService(data:any){
 
 export async function GET(req:Request,{params}:{params:Promise<{id:string}>}){
   const auth=await getAuth(req);if(!auth||!can(String(auth.role),"content:read"))return fail("Forbidden",403);
-  try{await connectDB();const {id}=await params;const item=await ServiceModel.findById(id).lean();return item?ok(item):fail("Service not found",404);}
+  try{
+    await connectDB();
+    const {id}=await params;
+    const item=await ServiceModel.findById(id).lean();
+    if(!item)return fail("Service not found",404);
+    const cover=item.coverMediaId?await MediaModel.findById(item.coverMediaId).select("url").lean():null;
+    return ok({...item,coverMediaUrl:cover?.url||""});
+  }
   catch(e){return fail(e instanceof Error?e.message:"Unable to load service",500);}
 }
 

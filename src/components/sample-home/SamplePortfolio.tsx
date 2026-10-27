@@ -17,8 +17,6 @@ export type FormattedPortfolioItem = {
   title: { fa: string; en?: string };
   description: { fa: string; en?: string };
   treatment?: { fa?: string; en?: string };
-  categorySlug?: string;
-  categoryName?: string;
   images: string[];
   beforeImage?: string;
   afterImage?: string;
@@ -28,7 +26,6 @@ export type FormattedPortfolioItem = {
 
 type SamplePortfolioProps = {
   items: FormattedPortfolioItem[];
-  categories?: { slug: string; name: { fa: string; en?: string } }[];
 };
 
 const FALLBACK_CASES: FormattedPortfolioItem[] = [
@@ -38,8 +35,6 @@ const FALLBACK_CASES: FormattedPortfolioItem[] = [
     title: { fa: "اصلاح طرح لبخند و ونیر سرامیکی", en: "Smile Design & Ceramic Veneers" },
     description: { fa: "اصلاح فرم، رنگ دندان‌ها و بستن فواصل با سرامیک فوق‌نازک ای‌مکس", en: "Tooth form & color correction with ultra-thin ceramic" },
     treatment: { fa: "۸ واحد لمینیت سرامیکی ای‌مکس (IPS e.max)", en: "8 units IPS e.max ceramic veneers" },
-    categorySlug: "smile",
-    categoryName: "اصلاح طرح لبخند",
     images: ["/assets/portfolio/smile-design-case-1-after.jpg", "/assets/portfolio/smile-design-case-1-before.jpg"],
     beforeImage: "/assets/portfolio/smile-design-case-1-before.jpg",
     afterImage: "/assets/portfolio/smile-design-case-1-after.jpg",
@@ -50,8 +45,6 @@ const FALLBACK_CASES: FormattedPortfolioItem[] = [
     title: { fa: "ایمپلنت تخصصی و بازسازی کامل فک", en: "Dental Implant & Full Arch" },
     description: { fa: "کاشت ایمپلنت‌های تیتانیومی سوئیسی با بارگذاری فوری پروتز زیرکونیا", en: "Swiss implant placement with immediate zirconia prosthesis" },
     treatment: { fa: "ایمپلنت دیجیتال اشترومن + روکش تمام سرامیک", en: "Straumann digital implant + ceramic crowns" },
-    categorySlug: "implant",
-    categoryName: "ایمپلنت دندان",
     images: ["/assets/portfolio/implant-full-mouth-case-2-after.jpg", "/assets/portfolio/implant-full-mouth-case-2-before.jpg"],
     beforeImage: "/assets/portfolio/implant-full-mouth-case-2-before.jpg",
     afterImage: "/assets/portfolio/implant-full-mouth-case-2-after.jpg",
@@ -62,8 +55,6 @@ const FALLBACK_CASES: FormattedPortfolioItem[] = [
     title: { fa: "ارتودنسی نامرئی و اصلاح نامرتبی", en: "Clear Aligners Orthodontics" },
     description: { fa: "ردیف‌سازی تخصصی دندان‌های فک بالا و پایین با الاینرهای شفاف دیجیتال", en: "Clear aligner therapy for crowding and alignment" },
     treatment: { fa: "الاینر شفاف دیجیتال دوره ۱۲ ماهه", en: "Clear aligners 12 months therapy" },
-    categorySlug: "ortho",
-    categoryName: "ارتودنسی",
     images: ["/assets/portfolio/align-invisible-case-3-after.jpg", "/assets/portfolio/align-invisible-case-3-before.jpg"],
     beforeImage: "/assets/portfolio/align-invisible-case-3-before.jpg",
     afterImage: "/assets/portfolio/align-invisible-case-3-after.jpg",
@@ -74,8 +65,6 @@ const FALLBACK_CASES: FormattedPortfolioItem[] = [
     title: { fa: "ترمیم زیبایی و کامپوزیت لیرینگ", en: "Aesthetic Composite Layering" },
     description: { fa: "بازسازی میکروسکوپی و برطرف‌کردن بدفرمی با کامپوزیت میکروهیبرید", en: "Microscopic composite bonding and aesthetic restoration" },
     treatment: { fa: "کامپوزیت ونیر نانوهیبرید رنگ طبیعی", en: "Natural nano-hybrid composite veneers" },
-    categorySlug: "cosmetic",
-    categoryName: "ترمیم و زیبایی",
     images: ["/assets/portfolio/restorative-micro-case-4-after.jpg", "/assets/portfolio/restorative-micro-case-4-before.jpg"],
     beforeImage: "/assets/portfolio/restorative-micro-case-4-before.jpg",
     afterImage: "/assets/portfolio/restorative-micro-case-4-after.jpg",
@@ -84,7 +73,7 @@ const FALLBACK_CASES: FormattedPortfolioItem[] = [
 
 const toPersianNum = (n: number) => String(n).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
 
-export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
+export function SamplePortfolio({ items }: SamplePortfolioProps) {
   // Use DB items if available, otherwise fall back to clinical photo cases
   const availableItems = items && items.length > 0 ? items : FALLBACK_CASES;
   // Maximum of 7 latest cases for the overlapping avatar bubbles as requested
@@ -148,29 +137,6 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
     }
   };
 
-  const handleTextPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const bounds = e.currentTarget.getBoundingClientRect();
-    const pointerX = (e.clientX - bounds.left) / bounds.width - 0.5;
-    const pointerY = (e.clientY - bounds.top) / bounds.height - 0.5;
-
-    e.currentTarget.querySelectorAll<HTMLElement>("[data-portfolio-shape]").forEach((shape) => {
-      const depth = Number(shape.dataset.depth || 1);
-      const rotation = Number(shape.dataset.rotation || 0);
-      const translateX = (pointerX * 20 * depth).toFixed(1);
-      const translateY = (pointerY * 16 * depth).toFixed(1);
-
-      shape.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation + pointerX * 3}deg)`;
-    });
-  };
-
-  const handleTextPointerLeave = (e: React.PointerEvent<HTMLDivElement>) => {
-    e.currentTarget.querySelectorAll<HTMLElement>("[data-portfolio-shape]").forEach((shape) => {
-      shape.style.transform = `rotate(${Number(shape.dataset.rotation || 0)}deg)`;
-    });
-  };
-
   return (
     <section className="py-16 sm:py-24 relative bg-white overflow-hidden" id="cases">
       {/* Subtle organic background decoration */}
@@ -189,25 +155,8 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
           
           {/* Text & Headlines Side (col-span-5) */}
           <div
-            className="lg:col-span-5 order-2 lg:order-1 relative isolate"
-            onPointerMove={handleTextPointerMove}
-            onPointerLeave={handleTextPointerLeave}
+            className="lg:col-span-5 order-2 lg:order-1 relative"
           >
-            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-              <span
-                data-portfolio-shape
-                data-depth="0.8"
-                data-rotation="0"
-                className="absolute right-[8%] top-[8%] h-28 w-28 rounded-full border border-[#596646]/25 bg-[#596646]/[0.04] transition-transform duration-500 ease-out will-change-transform motion-reduce:transition-none"
-              />
-              <span
-                data-portfolio-shape
-                data-depth="1.1"
-                data-rotation="18"
-                className="absolute bottom-[10%] left-[8%] h-20 w-20 rounded-xl border border-[#a58b52]/25 bg-[#a58b52]/[0.06] transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none"
-                style={{ transform: "rotate(18deg)" }}
-              />
-            </div>
             <div className="relative z-10 flex flex-col justify-center text-right">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#E8E2D5] text-xs font-bold text-[#404c34] mb-5 w-fit shadow-xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#D8AE98]" />
@@ -247,42 +196,12 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
              ======================================================== */}
           <div className="lg:col-span-7 order-1 lg:order-2">
 
-            {/* Categories filter pills above the comparison container */}
-            {categories && categories.length > 0 && (
-              <div
-                className="flex flex-nowrap items-center gap-2 mb-4 overflow-x-auto overscroll-x-contain pb-2"
-                role="tablist"
-                aria-label="دسته‌بندی نمونه‌کارها"
-              >
-                {categories.map((cat) => (
-                  <button
-                    key={cat.slug}
-                    type="button"
-                    onClick={() => {
-                      const matchIdx = latestSevenCases.findIndex((c) => c.categorySlug === cat.slug);
-                      if (matchIdx >= 0) {
-                        setActiveIndex(matchIdx);
-                        setSliderPosition(50);
-                      }
-                    }}
-                    className={`shrink-0 whitespace-nowrap text-[11px] px-3 py-1 rounded-full font-bold transition-all cursor-pointer ${
-                      currentCase.categorySlug === cat.slug
-                        ? "bg-[#404c34] text-white"
-                        : "bg-white/70 text-[#756F62] hover:bg-white"
-                    }`}
-                  >
-                    {cat.name.fa}
-                  </button>
-                ))}
-              </div>
-            )}
-            
             {/* Top Bar above/on the Card: Overlapping 7 Avatars */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 px-1">
               {/* Overlapping Circular Avatars (Up to 7 cases) */}
               <div className="flex items-center gap-2 self-end sm:self-auto">
                 {/* Stack of Overlapping Circles */}
-                <div className="flex items-center -space-x-2.5 sm:-space-x-3.5 space-x-reverse" role="tablist" aria-label="پرونده‌های نمونه‌کار">
+                <div className="flex flex-row-reverse items-center" dir="ltr" role="tablist" aria-label="پرونده‌های نمونه‌کار">
                   {latestSevenCases.map((caseItem, idx) => {
                     const isSelected = idx === activeIndex;
                     const avatarImg = caseItem?.afterImage || caseItem?.images?.[0] || "/assets/portfolio/smile-design-case-1-after.jpg";
@@ -296,28 +215,30 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
                           setSliderPosition(50);
                         }}
                         title={caseItem.title.fa}
-                        style={{ borderRadius: "50%", padding: 0 }}
-                        className={`relative shrink-0 overflow-hidden rounded-[50%] transition-all duration-300 focus:outline-none cursor-pointer ${
-                          isSelected
-                            ? "w-11 h-11 sm:w-13 sm:h-13 ring-3 ring-[#404c34] ring-offset-2 z-30 scale-110 shadow-lg"
-                            : "w-9 h-9 sm:w-11 sm:h-11 border-2 border-white opacity-85 hover:opacity-100 hover:scale-115 hover:z-20 shadow-sm"
+                        aria-label={caseItem.title.fa}
+                        style={{ marginLeft: idx === 0 ? 0 : "-0.75rem", appearance: "none", background: "transparent", border: 0, borderRadius: "50%", padding: 0 }}
+                        className={`relative z-0 grid h-12 w-12 shrink-0 cursor-pointer place-items-center rounded-full bg-transparent transition-all duration-300 focus:outline-none focus-visible:z-40 focus-visible:ring-2 focus-visible:ring-[#404c34] focus-visible:ring-offset-2 hover:z-40 ${
+                          isSelected ? "sm:h-14 sm:w-14 z-30" : ""
                         }`}
                         role="tab"
                         aria-selected={isSelected}
                       >
-                        <Image
-                          src={avatarImg}
-                          alt={caseItem.title.fa}
-                          fill
-                          sizes="52px"
-                          className="rounded-[50%] object-cover"
-                          referrerPolicy="no-referrer"
-                        />
-                        {isSelected && (
-                          <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#404c34] text-white rounded-full flex items-center justify-center text-[9px] font-bold shadow-xs border border-white">
-                            ✓
-                          </span>
-                        )}
+                        <span
+                          className={`relative block overflow-hidden rounded-full transition-all duration-300 ${
+                            isSelected
+                              ? "h-11 w-11 ring-3 ring-[#404c34] ring-offset-2 shadow-lg sm:h-[3.25rem] sm:w-[3.25rem]"
+                              : "h-9 w-9 border-2 border-white opacity-85 shadow-sm hover:opacity-100 sm:h-11 sm:w-11"
+                          }`}
+                        >
+                          <Image
+                            src={avatarImg}
+                            alt=""
+                            fill
+                            sizes="48px"
+                            className="rounded-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </span>
                       </button>
                     );
                   })}
@@ -418,7 +339,7 @@ export function SamplePortfolio({ items, categories }: SamplePortfolioProps) {
               <div className="absolute bottom-4 inset-x-4 sm:bottom-5 sm:inset-x-5 z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-3 sm:p-4 rounded-2xl bg-black/45 backdrop-blur-md border border-white/15 text-white pointer-events-none">
                 <div className="text-right">
                   <span className="text-[11px] font-bold text-emerald-300 block mb-0.5">
-                    {currentCase.treatment?.fa || currentCase.categoryName || "اصلاح تخصصی لبخند"}
+                    {currentCase.treatment?.fa || "اصلاح تخصصی لبخند"}
                   </span>
                   <strong className="text-sm sm:text-base font-black text-white">
                     {currentCase.title.fa}

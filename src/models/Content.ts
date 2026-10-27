@@ -88,8 +88,14 @@ const Testimonial = new Schema({
   status: contentStatus,
   sortOrder: { type: Number, default: 0 },
   featured: { type: Boolean, default: false },
+  showInReviews: { type: Boolean, default: false },
   ...auditFields
 }, { timestamps: true });
 Testimonial.index({ status: 1, sortOrder: 1, createdAt: -1 });
 
-export const DoctorModel=models.Doctor||model("Doctor",Doctor); export const ServiceModel=models.Service||model("Service",Service); export const PageModel=models.Page||model("Page",Page); export const BlogCategoryModel=models.BlogCategory||model("BlogCategory",BlogCategory); export const BlogPostModel=models.BlogPost||model("BlogPost",BlogPost); export const PortfolioCategoryModel=models.PortfolioCategory||model("PortfolioCategory",PortfolioCategory); export const PortfolioItemModel=models.PortfolioItem||model("PortfolioItem",PortfolioItem); export const ContentRevisionModel=models.ContentRevision||model("ContentRevision",ContentRevision); export const CredentialGroupModel=models.CredentialGroup||model("CredentialGroup",CredentialGroup); export const CredentialItemModel=models.CredentialItem||model("CredentialItem",CredentialItem); export const GalleryGroupModel=models.GalleryGroup||model("GalleryGroup",GalleryGroup); export const GalleryItemModel=models.GalleryItem||model("GalleryItem",GalleryItem); export const CommentModel=models.Comment||model("Comment",Comment); export const TestimonialModel=models.Testimonial||model("Testimonial",Testimonial);
+const testimonialModel = models.Testimonial || model("Testimonial", Testimonial);
+if (!testimonialModel.schema.path("showInReviews")) {
+  testimonialModel.schema.add({ showInReviews: { type: Boolean, default: false } });
+}
+
+export const DoctorModel=models.Doctor||model("Doctor",Doctor); export const ServiceModel=models.Service||model("Service",Service); export const PageModel=models.Page||model("Page",Page); export const BlogCategoryModel=models.BlogCategory||model("BlogCategory",BlogCategory); export const BlogPostModel=models.BlogPost||model("BlogPost",BlogPost); export const PortfolioCategoryModel=models.PortfolioCategory||model("PortfolioCategory",PortfolioCategory); export const PortfolioItemModel=models.PortfolioItem||model("PortfolioItem",PortfolioItem); export const ContentRevisionModel=models.ContentRevision||model("ContentRevision",ContentRevision); export const CredentialGroupModel=models.CredentialGroup||model("CredentialGroup",CredentialGroup); export const CredentialItemModel=models.CredentialItem||model("CredentialItem",CredentialItem); export const GalleryGroupModel=models.GalleryGroup||model("GalleryGroup",GalleryGroup); export const GalleryItemModel=models.GalleryItem||model("GalleryItem",GalleryItem); export const CommentModel=models.Comment||model("Comment",Comment); export const TestimonialModel = testimonialModel;

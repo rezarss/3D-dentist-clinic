@@ -1,15 +1,46 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { Pagination } from "@/components/admin/Pagination";
 import { useAdminFeedback } from "@/components/admin/AdminFeedback";
 
-type Item={_id:string;slug:string;title?:{fa?:string;en?:string};name?:{fa?:string;en?:string};status?:string;categoryIds?:string[];commentSettings?:{enabled?:boolean}};
+type Item={_id:string;slug:string;title?:{fa?:string;en?:string};name?:{fa?:string;en?:string};status?:string;categoryIds?:string[];commentSettings?:{enabled?:boolean};coverMediaUrl?:string;beforeMediaUrls?:string[];afterMediaUrls?:string[]};
 type Category={_id:string;name?:{fa?:string;en?:string};slug:string};
 type ListResponse={items:Item[];pagination:{page:number;limit:number;total:number;pages:number}};
 
-export function ContentList({title,endpoint,archive=true,createHref,editBase,categoriesEndpoint,categoriesHref}:{title:string;endpoint:string;archive?:boolean;createHref?:string;editBase?:string;categoriesEndpoint?:string;categoriesHref?:string}){
+export function ContentList({
+  title,
+  endpoint,
+  archive=true,
+  createHref,
+  editBase,
+  categoriesEndpoint,
+  categoriesHref,
+  showCoverImages=false,
+  showPortfolioImages=false,
+  showCategoryColumn=false,
+  deleteEndpoint,
+  deleteConfirmTitle,
+  deleteDescription,
+  deleteSuccessMessage,
+}:{
+  title:string;
+  endpoint:string;
+  archive?:boolean;
+  createHref?:string;
+  editBase?:string;
+  categoriesEndpoint?:string;
+  categoriesHref?:string;
+  showCoverImages?:boolean;
+  showPortfolioImages?:boolean;
+  showCategoryColumn?:boolean;
+  deleteEndpoint?:string;
+  deleteConfirmTitle?:string;
+  deleteDescription?:string;
+  deleteSuccessMessage?:string;
+}){
   const {confirm,toast}=useAdminFeedback();
   const [items,setItems]=useState<Item[]>([]);
   const [categories,setCategories]=useState<Category[]>([]);
@@ -21,6 +52,7 @@ export function ContentList({title,endpoint,archive=true,createHref,editBase,cat
   const [pagination,setPagination]=useState<ListResponse["pagination"]>({page:1,limit:10,total:0,pages:0});
   const [loading,setLoading]=useState(true);
   const [error,setError]=useState("");
+  const [deletingId,setDeletingId]=useState<string|null>(null);
 
   const load=useCallback(async()=>{
     setLoading(true);setError("");
@@ -65,6 +97,29 @@ export function ContentList({title,endpoint,archive=true,createHref,editBase,cat
     }catch(error){setError(error instanceof Error?error.message:"عملیات ناموفق بود");}
   }
 
+  async function deleteItem(item:Item){
+    const itemTitle=item.title?.fa||item.name?.fa||item.title?.en||item.name?.en||item.slug;
+    if(!await confirm({
+      title:deleteConfirmTitle||`حذف دائمی ${title}`,
+      description:`«${itemTitle}»؛ ${deleteDescription||"این مورد و دیدگاه‌ها و تاریخچهٔ ویرایش مرتبط برای همیشه حذف می‌شوند."}`,
+      confirmLabel:"حذف دائمی",
+      tone:"danger",
+    }))return;
+    setDeletingId(item._id);
+    setError("");
+    try{
+      const response=await fetch(`${deleteEndpoint}/${item._id}/permanent`,{method:"DELETE"});
+      const payload=await response.json();
+      if(!response.ok||!payload.success)throw new Error(payload.error?.message||`حذف ${title} ناموفق بود`);
+      toast(deleteSuccessMessage||`${title} و اطلاعات وابسته حذف شدند.`);
+      await load();
+    }catch(error){
+      setError(error instanceof Error?error.message:`حذف ${title} ناموفق بود`);
+    }finally{
+      setDeletingId(null);
+    }
+  }
+
   return <main className="content-list-page">
     <header className="content-list-heading">
       <div><span className="dashboard-eyebrow">مدیریت محتوا</span><h1>{title}</h1><p>جست‌وجو، فیلتر و مدیریت {title} از این صفحه.</p></div>
@@ -91,15 +146,33 @@ export function ContentList({title,endpoint,archive=true,createHref,editBase,cat
     <section className="content-list-table-wrap">
       {loading?<div className="content-list-state">در حال بارگذاری {title}…</div>:items.length===0?<div className="content-list-state"><strong>موردی پیدا نشد</strong><span>فیلترها را تغییر دهید یا یک مورد جدید اضافه کنید.</span></div>:
         <div className="content-list-scroll"><table className="content-list-table">
-          <thead><tr><th>عنوان</th><th>نشانی</th><th>وضعیت</th><th>دیدگاه</th><th>عملیات</th></tr></thead>
+          <thead><tr><th>عنوان</th><th>{showCategoryColumn?"دسته‌بندی":"نشانی"}</th><th>وضعیت</th><th>دیدگاه</th><th>عملیات</th></tr></thead>
           <tbody>{items.map(item=><tr key={item._id}>
-            <td><strong>{item.title?.fa||item.name?.fa||item.title?.en||item.name?.en||"بدون عنوان"}</strong></td>
-            <td dir="ltr"><code>/{item.slug}</code></td>
-            <td><span className={`content-comments-badge ${item.commentSettings?.enabled ? "is-enabled" : ""}`}>{item.commentSettings?.enabled ? "فعال" : "خاموش"}</span></td>
+            <td>
+              {showPortfolioImages&&editBase?(
+                <Link className="content-list-title-link content-list-portfolio-title-link" href={`${editBase}/${item._id}`}>
+                  <span className="content-list-portfolio-images" aria-label="تصاویر قبل و بعد از درمان">
+                    {[item.beforeMediaUrls?.[0],item.afterMediaUrls?.[0]].map((url,index)=>url?<Image key={index} className="content-list-cover" src={url} alt={index===0?"قبل از درمان":"بعد از درمان"} width={54} height={54} unoptimized/>:<span className="content-list-cover-placeholder" key={index} aria-label={index===0?"تصویر قبل موجود نیست":"تصویر بعد موجود نیست"} aria-hidden="true">✦</span>)}
+                  </span>
+                  <strong>{item.title?.fa||item.name?.fa||item.title?.en||item.name?.en||"بدون عنوان"}</strong>
+                </Link>
+              ):showCoverImages&&editBase?(
+                <Link className="content-list-title-link" href={`${editBase}/${item._id}`}>
+                  {item.coverMediaUrl?<Image className="content-list-cover" src={item.coverMediaUrl} alt="" width={56} height={56} unoptimized/>:<span className="content-list-cover-placeholder" aria-hidden="true">✦</span>}
+                  <strong>{item.title?.fa||item.name?.fa||item.title?.en||item.name?.en||"بدون عنوان"}</strong>
+                </Link>
+              ):<strong>{item.title?.fa||item.name?.fa||item.title?.en||item.name?.en||"بدون عنوان"}</strong>}
+            </td>
+            {showCategoryColumn?<td>{item.categoryIds?.length?item.categoryIds.map(id=>{
+              const category=categories.find(entry=>entry._id===id);
+              return category?.name?.fa||category?.name?.en||category?.slug;
+            }).filter(Boolean).join("، ")||"—":"—"}</td>:<td dir="ltr"><code>/{item.slug}</code></td>}
             <td><span className={`content-status-badge status-${item.status||"draft"}`}>{({draft:"پیش‌نویس",published:"منتشرشده",scheduled:"زمان‌بندی‌شده",archived:"بایگانی"} as Record<string,string>)[item.status||"draft"]||item.status||"—"}</span></td>
+            <td><span className={`content-comments-badge ${item.commentSettings?.enabled ? "is-enabled" : ""}`}>{item.commentSettings?.enabled ? "فعال" : "خاموش"}</span></td>
             <td><div className="content-row-actions">
               {editBase&&<Link className="admin-action-neutral" href={`${editBase}/${item._id}`}>ویرایش</Link>}
               {archive&&item.status!=="archived"&&<button className="admin-action-warning" onClick={()=>void archiveItem(item._id)} type="button">بایگانی</button>}
+              {deleteEndpoint&&<button className="admin-action-danger" onClick={()=>void deleteItem(item)} type="button" disabled={deletingId===item._id}>{deletingId===item._id?"در حال حذف…":"حذف دائمی"}</button>}
             </div></td>
           </tr>)}</tbody>
         </table></div>}
