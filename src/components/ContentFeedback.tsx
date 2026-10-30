@@ -19,7 +19,7 @@ export function ContentFeedback({
   ratingEnabled,
 }: {
   targetId: string;
-  targetType: "service" | "portfolio" | "blog";
+  targetType: "service" | "portfolio" | "blog" | "doctor";
   contentLabel: string;
   commentsEnabled: boolean;
   ratingEnabled: boolean;
